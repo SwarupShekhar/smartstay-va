@@ -3,68 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmartStay VA - Hire a VA</title>
+  <title>SmartStay VA | Hire</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-  <!-- Navigation Bar -->
-  <nav>
+  <nav class="nav">
     <div class="nav-container">
-      <div class="logo">SmartStay VA</div>
+      <div class="logo"><a href="index.html">SmartStay VA</a></div>
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="services.html">Services</a>
         <a href="pricing.html">Pricing</a>
         <a href="about.html">About</a>
-        <a href="hire.html" class="btn">Hire Now</a>
+        <a href="hire.html">Hire</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="hero hero-small">
-    <div class="hero-content">
-      <h1>Hire Your Virtual Assistant</h1>
-      <p>Fill out the form below and we’ll connect you with a dedicated VA for your property.</p>
-    </div>
-  </header>
-
-  <!-- Form Section -->
-  <section class="hire-form-section">
-    <div class="form-card">
-      <form id="propertyForm">
-        <div class="form-group">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" placeholder="Your full name" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Your email address" required>
-        </div>
-        <div class="form-group">
-          <label for="property">Property Name</label>
-          <input type="text" id="property" name="property" placeholder="Your property name" required>
-        </div>
-        <div class="form-group">
-          <label for="location">Location</label>
-          <input type="text" id="location" name="location" placeholder="City, State" required>
-        </div>
-        <div class="form-group">
-          <label for="services">Services Needed</label>
-          <textarea id="services" name="services" placeholder="Describe the services you need" required></textarea>
-        </div>
-        <button type="submit" class="btn">Submit</button>
-        <p id="status" class="form-status"></p>
-      </form>
+  <section class="hero hero-small">
+    <div class="hero-overlay" data-aos="fade-down">
+      <h1>Hire a Virtual Assistant</h1>
     </div>
   </section>
 
-  <!-- Footer -->
+  <section data-aos="fade-up">
+    <form id="propertyForm">
+      <label>Full Name:</label>
+      <input type="text" name="name" required>
+
+      <label>Email:</label>
+      <input type="email" name="email" required>
+
+      <label>Property Name:</label>
+      <input type="text" name="property" required>
+
+      <label>Location:</label>
+      <input type="text" name="location" required>
+
+      <label>Services Needed:</label>
+      <textarea name="services" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+    <p id="status"></p>
+  </section>
+
   <footer>
-    <p>&copy; 2025 SmartStay VA. All rights reserved.</p>
+    &copy; 2025 SmartStay VA. All Rights Reserved.
   </footer>
 
   <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+  </script>
 </body>
 </html>

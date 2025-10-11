@@ -3,88 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmartStay VA - Home</title>
+  <title>SmartStay VA | Home</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-  <!-- Navigation Bar -->
-  <nav>
+  <!-- NAVIGATION -->
+  <nav class="nav">
     <div class="nav-container">
-      <div class="logo">SmartStay VA</div>
+      <div class="logo"><a href="index.html">SmartStay VA</a></div>
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="services.html">Services</a>
         <a href="pricing.html">Pricing</a>
         <a href="about.html">About</a>
-        <a href="hire.html" class="btn">Hire Now</a>
+        <a href="hire.html">Hire</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="hero">
-    <div class="hero-content">
-      <h1>Hassle-Free Property Management</h1>
-      <p>Dedicated Virtual Assistants for Short-Term Rentals. Save time, maximize revenue, and delight your guests.</p>
-      <a href="hire.html" class="btn btn-hero">Get Started</a>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-overlay" data-aos="fade-down">
+      <div>
+        <h1>Smart Virtual Assistants for Short-Term Rentals</h1>
+        <p>Save time, maximize revenue, and reduce stress with our dedicated VAs.</p>
+        <a href="hire.html" class="btn btn-hero">Hire a VA Today</a>
+      </div>
     </div>
-  </header>
+  </section>
 
-  <!-- Services Section -->
-  <section class="services">
-    <h2>Our Services</h2>
+  <!-- SERVICES PREVIEW -->
+  <section class="services" data-aos="fade-up">
+    <h2>Our Core Services</h2>
     <div class="service-cards">
-      <div class="card">
-        <img src="https://img.icons8.com/color/96/000000/chat.png" alt="Guest Communication">
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <img src="https://img.icons8.com/color/96/000000/communication.png" alt="Guest Communication">
         <h3>Guest Communication</h3>
-        <p>Respond to guest inquiries promptly and professionally, ensuring 5-star experiences.</p>
+        <p>Prompt and professional messaging to ensure 5-star reviews.</p>
       </div>
-      <div class="card">
-        <img src="https://img.icons8.com/color/96/000000/house.png" alt="Booking Management">
+      <div class="card" data-aos="fade-up" data-aos-delay="200">
+        <img src="https://img.icons8.com/color/96/000000/calendar.png" alt="Booking Management">
         <h3>Booking Management</h3>
-        <p>Handle all bookings, confirmations, and cancellations efficiently.</p>
+        <p>Keep your calendars synced, organized, and optimized for bookings.</p>
       </div>
-      <div class="card">
+      <div class="card" data-aos="fade-up" data-aos-delay="300">
         <img src="https://img.icons8.com/color/96/000000/cleaning.png" alt="Cleaning & Maintenance">
         <h3>Cleaning & Maintenance</h3>
-        <p>Coordinate cleaning and maintenance schedules to keep your property spotless.</p>
+        <p>Coordinate cleaners and maintenance without lifting a finger.</p>
       </div>
     </div>
   </section>
 
-  <!-- How It Works Section -->
-  <section class="how-it-works">
-    <h2>How It Works</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="step-number">1</div>
-        <h3>Submit Your Property</h3>
-        <p>Provide your property details and services needed through our simple form.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">2</div>
-        <h3>Get Your Dedicated VA</h3>
-        <p>We assign a skilled virtual assistant who understands your property and requirements.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">3</div>
-        <h3>Relax and Monitor</h3>
-        <p>Your VA handles operations while you monitor bookings, messages, and revenue effortlessly.</p>
-      </div>
-    </div>
+  <!-- CTA -->
+  <section class="cta" data-aos="zoom-in">
+    <h2>Ready to get started?</h2>
+    <a href="hire.html" class="btn btn-cta">Hire Your VA Today</a>
   </section>
 
-  <!-- Call to Action Section -->
-  <section class="cta">
-    <h2>Ready to Simplify Your Rental Management?</h2>
-    <a href="hire.html" class="btn btn-cta">Hire a Virtual Assistant Today</a>
-  </section>
-
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 SmartStay VA. All rights reserved.</p>
+    &copy; 2025 SmartStay VA. All Rights Reserved.
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+  </script>
 </body>
 </html>

@@ -3,75 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmartStay VA - About Us</title>
+  <title>SmartStay VA | About</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-  <!-- Navigation Bar -->
-  <nav>
+  <nav class="nav">
     <div class="nav-container">
-      <div class="logo">SmartStay VA</div>
+      <div class="logo"><a href="index.html">SmartStay VA</a></div>
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="services.html">Services</a>
         <a href="pricing.html">Pricing</a>
         <a href="about.html">About</a>
-        <a href="hire.html" class="btn">Hire Now</a>
+        <a href="hire.html">Hire</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="hero hero-small">
-    <div class="hero-content">
+  <section class="hero hero-small">
+    <div class="hero-overlay" data-aos="fade-down">
       <h1>About SmartStay VA</h1>
-      <p>Professional Virtual Assistant services tailored to short-term rental owners.</p>
-    </div>
-  </header>
-
-  <!-- About / Mission Section -->
-  <section class="about">
-    <div class="about-content">
-      <h2>Our Mission</h2>
-      <p>At SmartStay VA, we aim to simplify property management for short-term rental owners. Our dedicated virtual assistants handle bookings, guest communication, cleaning coordination, and more — so you can save time, reduce stress, and maximize revenue.</p>
-    </div>
-    <div class="about-image">
-      <img src="https://images.unsplash.com/photo-1580584121677-3c9b3f0c0e29?auto=format&fit=crop&w=800&q=80" alt="SmartStay Team">
     </div>
   </section>
 
-  <!-- Optional Team Section -->
-  <section class="team">
-    <h2>Meet Our Team</h2>
-    <div class="team-cards">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=400&q=80" alt="Team Member">
-        <h3>Swarup Shekhar</h3>
-        <p>Founder & CEO</p>
+  <section class="services">
+    <h2 data-aos="fade-up">Our Mission</h2>
+    <p data-aos="fade-up" data-aos-delay="100">
+      At SmartStay VA, we aim to simplify the lives of short-term rental owners by providing dedicated virtual assistants who handle the daily operations efficiently and professionally.
+    </p>
+
+    <h2 data-aos="fade-up" data-aos-delay="200">Our Team</h2>
+    <div class="service-cards">
+      <div class="card" data-aos="fade-up" data-aos-delay="300">
+        <img src="https://img.icons8.com/color/96/000000/manager.png" alt="Team Lead">
+        <h3>Team Lead</h3>
+        <p>Experienced in hospitality and operations management, leading our VA team.</p>
       </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1595152772835-219674b2a8a4?auto=format&fit=crop&w=400&q=80" alt="Team Member">
-        <h3>Jane Doe</h3>
-        <p>Operations Manager</p>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1595152772835-219674b2a8a4?auto=format&fit=crop&w=400&q=80" alt="Team Member">
-        <h3>John Smith</h3>
-        <p>Lead VA Coordinator</p>
+      <div class="card" data-aos="fade-up" data-aos-delay="400">
+        <img src="https://img.icons8.com/color/96/000000/virtual-reality.png" alt="VAs">
+        <h3>Virtual Assistants</h3>
+        <p>Professional VAs trained to handle guest communication, bookings, and maintenance coordination.</p>
       </div>
     </div>
   </section>
 
-  <!-- Optional CTA Section -->
-  <section class="cta">
-    <h2>Ready to Simplify Your Rental Management?</h2>
-    <a href="hire.html" class="btn btn-cta">Hire a Virtual Assistant Today</a>
+  <section class="cta" data-aos="zoom-in">
+    <h2>Want to learn more?</h2>
+    <a href="hire.html" class="btn btn-cta">Hire Your VA Today</a>
   </section>
 
-  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 SmartStay VA. All rights reserved.</p>
+    &copy; 2025 SmartStay VA. All Rights Reserved.
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+  </script>
 </body>
 </html>

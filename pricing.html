@@ -3,74 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmartStay VA - Pricing</title>
+  <title>SmartStay VA | Pricing</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-  <!-- Navigation Bar -->
-  <nav>
+  <nav class="nav">
     <div class="nav-container">
-      <div class="logo">SmartStay VA</div>
+      <div class="logo"><a href="index.html">SmartStay VA</a></div>
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="services.html">Services</a>
         <a href="pricing.html">Pricing</a>
         <a href="about.html">About</a>
-        <a href="hire.html" class="btn">Hire Now</a>
+        <a href="hire.html">Hire</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="hero hero-small">
-    <div class="hero-content">
+  <section class="hero hero-small">
+    <div class="hero-overlay" data-aos="fade-down">
       <h1>Pricing Plans</h1>
-      <p>Flexible plans to suit your short-term rental needs. Choose the one that fits you best.</p>
     </div>
-  </header>
+  </section>
 
-  <!-- Pricing Cards Section -->
-  <section class="pricing">
-    <div class="pricing-cards">
-      <div class="card">
+  <section class="services">
+    <h2 data-aos="fade-up">Flexible Pricing Options</h2>
+    <div class="service-cards">
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
         <h3>Basic Plan</h3>
-        <p class="price">$199/month</p>
         <ul>
-          <li>Guest Communication</li>
-          <li>Booking Management</li>
-          <li>Email Support</li>
+          <li>Guest communication</li>
+          <li>Booking management</li>
+          <li>Email support</li>
         </ul>
-        <a href="hire.html" class="btn">Get Started</a>
+        <p><strong>$250/month</strong></p>
       </div>
-      <div class="card featured">
+      <div class="card" data-aos="fade-up" data-aos-delay="200">
         <h3>Standard Plan</h3>
-        <p class="price">$349/month</p>
         <ul>
-          <li>Everything in Basic</li>
-          <li>Cleaning & Maintenance Coordination</li>
-          <li>Revenue Optimization</li>
-          <li>Phone & Email Support</li>
+          <li>All Basic Plan services</li>
+          <li>Cleaning coordination</li>
+          <li>Financial tracking</li>
         </ul>
-        <a href="hire.html" class="btn">Get Started</a>
+        <p><strong>$450/month</strong></p>
       </div>
-      <div class="card">
+      <div class="card" data-aos="fade-up" data-aos-delay="300">
         <h3>Premium Plan</h3>
-        <p class="price">$499/month</p>
         <ul>
-          <li>Everything in Standard</li>
-          <li>Full Calendar Sync</li>
-          <li>24/7 Guest Support</li>
-          <li>Custom VA Assignment</li>
+          <li>All Standard Plan services</li>
+          <li>Maintenance coordination</li>
+          <li>Priority support</li>
         </ul>
-        <a href="hire.html" class="btn">Get Started</a>
+        <p><strong>$650/month</strong></p>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <section class="cta" data-aos="zoom-in">
+    <h2>Choose your plan and get started today!</h2>
+    <a href="hire.html" class="btn btn-cta">Hire Your VA Today</a>
+  </section>
+
   <footer>
-    <p>&copy; 2025 SmartStay VA. All rights reserved.</p>
+    &copy; 2025 SmartStay VA. All Rights Reserved.
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+  </script>
 </body>
 </html>
