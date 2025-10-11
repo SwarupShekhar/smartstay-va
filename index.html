@@ -3,41 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmartStay VA</title>
+  <title>SmartStay VA - Home</title>
   <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Navigation Bar -->
   <nav>
-    <a href="index.html">Home</a>
-    <a href="services.html">Services</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="about.html">About</a>
-    <a href="hire.html">Hire</a>
+    <div class="nav-container">
+      <div class="logo">SmartStay VA</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="hire.html" class="btn">Hire Now</a>
+      </div>
+    </div>
   </nav>
 
   <!-- Hero Section -->
-  <header>
-    <h1>Welcome to SmartStay VA</h1>
-    <p>Your trusted partner for short-term rental virtual assistance.</p>
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Hassle-Free Property Management</h1>
+      <p>Dedicated Virtual Assistants for Short-Term Rentals. Save time, maximize revenue, and delight your guests.</p>
+      <a href="hire.html" class="btn btn-hero">Get Started</a>
+    </div>
   </header>
 
-  <!-- Services Overview -->
-  <section>
+  <!-- Services Section -->
+  <section class="services">
     <h2>Our Services</h2>
-    <p>We handle property management tasks so you can focus on growing your rental business.</p>
-    <ul>
-      <li>Guest Communication</li>
-      <li>Booking Management</li>
-      <li>Property Listing Optimization</li>
-      <li>Cleaning Coordination</li>
-    </ul>
+    <div class="service-cards">
+      <div class="card">
+        <img src="https://img.icons8.com/color/96/000000/chat.png" alt="Guest Communication">
+        <h3>Guest Communication</h3>
+        <p>Respond to guest inquiries promptly and professionally, ensuring 5-star experiences.</p>
+      </div>
+      <div class="card">
+        <img src="https://img.icons8.com/color/96/000000/house.png" alt="Booking Management">
+        <h3>Booking Management</h3>
+        <p>Handle all bookings, confirmations, and cancellations efficiently.</p>
+      </div>
+      <div class="card">
+        <img src="https://img.icons8.com/color/96/000000/cleaning.png" alt="Cleaning & Maintenance">
+        <h3>Cleaning & Maintenance</h3>
+        <p>Coordinate cleaning and maintenance schedules to keep your property spotless.</p>
+      </div>
+    </div>
   </section>
 
-  <!-- Call to Action -->
-  <section>
-    <h2>Hire a Virtual Assistant Today</h2>
-    <p><a href="hire.html">Submit your property details</a> and get started.</p>
+  <!-- How It Works Section -->
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Submit Your Property</h3>
+        <p>Provide your property details and services needed through our simple form.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Get Your Dedicated VA</h3>
+        <p>We assign a skilled virtual assistant who understands your property and requirements.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Relax and Monitor</h3>
+        <p>Your VA handles operations while you monitor bookings, messages, and revenue effortlessly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="cta">
+    <h2>Ready to Simplify Your Rental Management?</h2>
+    <a href="hire.html" class="btn btn-cta">Hire a Virtual Assistant Today</a>
   </section>
 
   <!-- Footer -->
