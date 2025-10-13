@@ -67,7 +67,7 @@ a {
 /* ===== HERO SECTIONS ===== */
 .hero {
   height: 80vh;
-  background: url('https://images.unsplash.com/photo-1560184897-c82f5d89b3ed?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+  background: url('https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/f400423c9d00c59a77703e46e77017f6666926c9/Lucid_Origin_a_cinematic_photo_of_ultrarealistic_and_in_high_d_3.jpg') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -152,7 +152,7 @@ a {
 
 /* ===== FORM (hire.html) ===== */
 #propertyForm {
-  max-width: 600px;
+  max-width: 1200px;
   margin: 2rem auto;
   background: #fff;
   padding: 2rem;
