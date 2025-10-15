@@ -4,56 +4,157 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SmartStay VA | Hire</title>
-  <link rel="stylesheet" href="style.css">
+  
+  <!-- Load Tailwind CSS CDN for utility classes and the complex button -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    /* Custom font to match original aesthetic */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+  </style>
 </head>
-<body>
-  <nav class="nav">
-    <div class="nav-container">
-      <div class="logo"><a href="index.html">SmartStay VA</a></div>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="about.html">About</a>
-        <a href="hire.html">Hire</a>
+<body class="bg-[#f9f9f9]">
+  
+  <!-- Navigation (styled with Tailwind utility classes) -->
+  <nav class="sticky top-0 z-10 bg-white shadow-lg">
+    <div class="max-w-6xl mx-auto flex justify-between items-center py-4 px-8">
+      <div class="text-xl font-bold"><a href="index.html" class="text-[#004aad]">SmartStay VA</a></div>
+      <div class="flex space-x-6">
+        <a href="index.html" class="text-[#004aad] font-semibold hover:text-[#ffce00] transition duration-300">Home</a>
+        <a href="services.html" class="text-[#004aad] font-semibold hover:text-[#ffce00] transition duration-300">Services</a>
+        <a href="pricing.html" class="text-[#004aad] font-semibold hover:text-[#ffce00] transition duration-300">Pricing</a>
+        <a href="about.html" class="text-[#004aad] font-semibold hover:text-[#ffce00] transition duration-300">About</a>
+        <a href="hire.html" class="text-[#004aad] font-semibold hover:text-[#ffce00] transition duration-300">Hire</a>
       </div>
     </div>
   </nav>
 
-  <section class="hero hero-small">
-    <div class="hero-overlay" data-aos="fade-down">
-      <h1>Hire a Virtual Assistant</h1>
+  <!-- Hero Section (styled with Tailwind utility classes) -->
+  <section 
+    class="relative h-[50vh] flex justify-center items-center text-center text-white overflow-hidden bg-cover bg-center bg-fixed"
+    style="background-image: url('https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Lucid_Origin_a_cinematic_photo_of_ultrarealistic_and_in_high_d_3.jpg');"
+  >
+    <div class="absolute inset-0 bg-black/40 flex justify-center items-center flex-col p-4 z-10" data-aos="fade-down">
+      <h1 class="text-4xl md:text-5xl font-extrabold">Hire a Virtual Assistant</h1>
     </div>
   </section>
 
-  <section data-aos="fade-up">
-    <form id="propertyForm">
-      <label>Full Name:</label>
-      <input type="text" name="name" required>
+  <!-- Form Section (Consolidated and styled with Tailwind utility classes) -->
+  <section class="py-12 px-4" data-aos="fade-up">
+    <!-- Single Form Structure with Tailwind Styles -->
+    <form id="hireForm" class="max-w-[900px] w-full mx-auto my-8 bg-white p-8 md:p-12 rounded-2xl shadow-xl space-y-5">
+        
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Tell Us About Your Needs</h2>
 
-      <label>Email:</label>
-      <input type="email" name="email" required>
+        <!-- Field: Full Name -->
+        <div>
+            <label for="name" class="block mb-1 font-semibold text-gray-700">Full Name:</label>
+            <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                class="w-full p-3 rounded-lg border border-gray-300 text-base resize-y focus:ring-rose-500 focus:border-rose-500 transition duration-300"
+                required
+            >
+        </div>
 
-      <label>Property Name:</label>
-      <input type="text" name="property" required>
+        <!-- Field: Email -->
+        <div>
+            <label for="email" class="block mb-1 font-semibold text-gray-700">Email:</label>
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="w-full p-3 rounded-lg border border-gray-300 text-base resize-y focus:ring-rose-500 focus:border-rose-500 transition duration-300"
+                required
+            >
+        </div>
 
-      <label>Location:</label>
-      <input type="text" name="location" required>
+        <!-- Field: Property Name -->
+        <div>
+            <label for="property" class="block mb-1 font-semibold text-gray-700">Property Name:</label>
+            <input 
+                type="text" 
+                id="property" 
+                name="property" 
+                class="w-full p-3 rounded-lg border border-gray-300 text-base resize-y focus:ring-rose-500 focus:border-rose-500 transition duration-300"
+                required
+            >
+        </div>
 
-      <label>Services Needed:</label>
-      <textarea name="services" required></textarea>
+        <!-- Field: Location -->
+        <div>
+            <label for="location" class="block mb-1 font-semibold text-gray-700">Location:</label>
+            <input 
+                type="text" 
+                id="location" 
+                name="location" 
+                class="w-full p-3 rounded-lg border border-gray-300 text-base resize-y focus:ring-rose-500 focus:border-rose-500 transition duration-300"
+                required
+            >
+        </div>
 
-      <button type="submit">Submit</button>
+        <!-- Field: Services Needed -->
+        <div>
+            <label for="services" class="block mb-1 font-semibold text-gray-700">Services Needed (e.g., booking management, guest communication):</label>
+            <textarea 
+                id="services" 
+                name="services" 
+                rows="4"
+                class="w-full p-3 rounded-lg border border-gray-300 text-base resize-y focus:ring-rose-500 focus:border-rose-500 transition duration-300"
+                required
+            ></textarea>
+        </div>
+
+        <!-- Submission Button Container with Animated Button -->
+        <div class="mt-8 flex justify-center w-full"> 
+            
+            <!-- THE COMPLEX ANIMATED BUTTON (uses the full utility class string) -->
+            <button 
+                type="submit" 
+                class="group group-hover:before:duration-500 group-hover:after:duration-500 after:duration-500 hover:border-rose-300 hover:before:[box-shadow:_20px_20px_20px_30px_#a21caf] duration-500 before:duration-500 hover:duration-500 underline underline-offset-2 hover:after:-right-8 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:underline hover:underline-offset-4  origin-left hover:decoration-2 hover:text-rose-300 relative bg-neutral-800 h-16 w-64 border text-left p-3 text-gray-50 text-base font-bold rounded-lg  overflow-hidden  before:absolute before:w-12 before:h-12 before:content-[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg  after:absolute after:z-10 after:w-20 after:h-20 after:content-['']  after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg"
+            >
+                Submit Request
+            </button>
+            
+        </div>
+
+        <!-- Status Message Area -->
+        <p id="status" class="mt-6 text-center font-semibold pt-4 text-gray-500">
+            Click 'Submit Request' to proceed.
+        </p>
+        
     </form>
-    <p id="status"></p>
   </section>
 
-  <footer>
+  <!-- Footer (styled with Tailwind utility classes) -->
+  <footer class="text-center py-8 bg-gray-200 mt-8 text-sm text-gray-600">
     &copy; 2025 SmartStay VA. All Rights Reserved.
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+      // Simple JS for form submission and status feedback
+      document.getElementById('hireForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          const statusDiv = document.getElementById('status');
+          
+          // Show processing status
+          statusDiv.className = 'mt-6 text-center font-semibold pt-4 text-yellow-600';
+          statusDiv.innerHTML = '<p>Processing Request...</p>';
+          
+          // Simulate API latency
+          setTimeout(() => {
+              // Show success message with Tailwind green color
+              statusDiv.className = 'mt-6 text-center font-semibold pt-4 text-green-600';
+              statusDiv.innerHTML = '<p>Request sent successfully! We will contact you shortly.</p>';
+              document.getElementById('hireForm').reset();
+          }, 2500);
+      });
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 1000, once: true });
