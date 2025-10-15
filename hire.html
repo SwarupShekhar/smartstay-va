@@ -33,11 +33,15 @@
     </div>
   </nav>
 
-  <!-- Hero Section (styled with Tailwind utility classes) -->
+  <!-- Hero Section with Slideshow Structure Restored -->
   <section 
-    class="relative h-[50vh] flex justify-center items-center text-center text-white overflow-hidden bg-cover bg-center bg-fixed"
-    style="background-image: url('https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Lucid_Origin_a_cinematic_photo_of_ultrarealistic_and_in_high_d_3.jpg');"
+    class="hero relative h-[50vh] flex justify-center items-center text-center text-white overflow-hidden"
   >
+    <!-- Slideshow container (required by script.js) -->
+    <div class="hero-slideshow absolute inset-0 bg-cover bg-center z-0 transition-opacity duration-1500" 
+         style="background-image: url('https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Lucid_Origin_a_cinematic_photo_of_ultrarealistic_and_in_high_d_3.jpg');">
+    </div>
+    
     <div class="absolute inset-0 bg-black/40 flex justify-center items-center flex-col p-4 z-10" data-aos="fade-down">
       <h1 class="text-4xl md:text-5xl font-extrabold">Hire a Virtual Assistant</h1>
     </div>
@@ -116,6 +120,7 @@
             <!-- THE COMPLEX ANIMATED BUTTON (uses the full utility class string) -->
             <button 
                 type="submit" 
+                id="submitButton"
                 class="group group-hover:before:duration-500 group-hover:after:duration-500 after:duration-500 hover:border-rose-300 hover:before:[box-shadow:_20px_20px_20px_30px_#a21caf] duration-500 before:duration-500 hover:duration-500 underline underline-offset-2 hover:after:-right-8 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:underline hover:underline-offset-4  origin-left hover:decoration-2 hover:text-rose-300 relative bg-neutral-800 h-16 w-64 border text-left p-3 text-gray-50 text-base font-bold rounded-lg  overflow-hidden  before:absolute before:w-12 before:h-12 before:content-[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg  after:absolute after:z-10 after:w-20 after:h-20 after:content-['']  after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg"
             >
                 Submit Request
@@ -137,23 +142,106 @@
   </footer>
 
   <script>
-      // Simple JS for form submission and status feedback
-      document.getElementById('hireForm').addEventListener('submit', function(e) {
-          e.preventDefault();
-          const statusDiv = document.getElementById('status');
-          
-          // Show processing status
-          statusDiv.className = 'mt-6 text-center font-semibold pt-4 text-yellow-600';
-          statusDiv.innerHTML = '<p>Processing Request...</p>';
-          
-          // Simulate API latency
-          setTimeout(() => {
-              // Show success message with Tailwind green color
-              statusDiv.className = 'mt-6 text-center font-semibold pt-4 text-green-600';
-              statusDiv.innerHTML = '<p>Request sent successfully! We will contact you shortly.</p>';
-              document.getElementById('hireForm').reset();
-          }, 2500);
-      });
+    // =======================
+    // HERO BACKGROUND SLIDESHOW (Integrated from script.js)
+    // =======================
+    const slideshow = document.querySelector('.hero-slideshow');
+
+    if (slideshow) {
+        const backgrounds = [
+            'https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Lucid_Origin_a_cinematic_photo_of_ultrarealistic_and_in_high_d_3.jpg',
+            'https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Lucid_Origin_a_cinematic_photo_of_ultrarealistic_and_high_defi_3.jpg',
+            'https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Lucid_Origin_a_cinematic_photo_of_ultrarealistic_and_high_defi_2.jpg',
+            'https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Lucid_Origin_a_cinematic_photo_of_ultrarealistic_and_high_defi_1.jpg',
+            'https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Lucid_Origin_a_cinematic_photo_of_ultrarealistic_and_high_defi_0.jpg'
+        ];
+
+        let current = 0;
+
+        function nextBackground() {
+            const next = (current + 1) % backgrounds.length;
+
+            // Fade out current
+            slideshow.style.opacity = 0;
+
+            setTimeout(() => {
+                slideshow.style.backgroundImage = `url('${backgrounds[next]}')`;
+                slideshow.style.opacity = 1;
+                current = next;
+            }, 1500); // matches CSS transition time
+        }
+
+        // Initial background is set in HTML, but we start the sequence here
+        // Change every 5 seconds
+        setInterval(nextBackground, 5000);
+    }
+
+    // =======================
+    // FORM SUBMISSION TO GOOGLE SHEETS (Integrated from script.js)
+    // =======================
+    const hireForm = document.getElementById("hireForm");
+
+    if (hireForm) {
+        hireForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const form = e.target;
+            // Collect data, using friendly key names for the Google Sheet columns
+            const data = {
+                Name: form.name.value,
+                Email: form.email.value,
+                Property: form.property.value,
+                Location: form.location.value,
+                Services: form.services.value,
+                Timestamp: new Date().toLocaleString()
+            };
+
+            // This is the URL provided in your original script.js
+            const scriptURL = "https://script.google.com/macros/s/AKfycbzWT4qtwjVQgW4Q0bfEcZr9vv2pUQy3waB7RPB2W96Bubh0FO7kJ_0rsL1GQxZnHUDj/exec";
+
+            const submitBtn = document.getElementById("submitButton");
+            const statusEl = document.getElementById("status");
+
+            // Start loading state (using Tailwind classes)
+            statusEl.className = 'mt-6 text-center font-semibold pt-4 text-yellow-600';
+            statusEl.textContent = "Processing Request...";
+            submitBtn.disabled = true;
+
+            try {
+                // Post data to the Google Sheets Apps Script
+                const res = await fetch(scriptURL, {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (res.ok) {
+                    // Success message using Tailwind styling
+                    statusEl.className = 'mt-6 text-center font-semibold pt-4 text-green-600';
+                    statusEl.textContent = "✅ Request sent successfully and data saved to the sheet!";
+                    form.reset();
+                } else {
+                    // Error message using Tailwind styling
+                    statusEl.className = 'mt-6 text-center font-semibold pt-4 text-red-600';
+                    statusEl.textContent = `❌ Submission failed. Server responded with status: ${res.status}`;
+                }
+            } catch (error) {
+                // Network error message using Tailwind styling
+                statusEl.className = 'mt-6 text-center font-semibold pt-4 text-red-600';
+                statusEl.textContent = "❌ Submission failed. Please check your network connection.";
+                console.error("Error:", error);
+            } finally {
+                submitBtn.disabled = false;
+                // Reset status text after 5 seconds
+                setTimeout(() => {
+                    statusEl.textContent = "Click 'Submit Request' to proceed.";
+                    statusEl.className = 'mt-6 text-center font-semibold pt-4 text-gray-500';
+                }, 5000);
+            }
+        });
+    }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
