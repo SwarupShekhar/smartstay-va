@@ -177,7 +177,7 @@
     }
 
     // =======================
-    // FORM SUBMISSION TO GOOGLE SHEETS (Integrated from script.js)
+    // FORM SUBMISSION TO GOOGLE SHEETS (FormData version)
     // =======================
     const hireForm = document.getElementById("hireForm");
 
@@ -186,55 +186,55 @@
             e.preventDefault();
 
             const form = e.target;
-            // Collect data, using friendly key names for the Google Sheet columns
-            const data = {
-                Name: form.name.value,
-                Email: form.email.value,
-                Property: form.property.value,
-                Location: form.location.value,
-                Services: form.services.value,
-                Timestamp: new Date().toLocaleString()
-            };
+            const data = new FormData(form);
 
-            // This is the URL provided in your original script.js
+            // Optionally add timestamp if you want
+            // data.append("Timestamp", new Date().toLocaleString());
+
             const scriptURL = "https://script.google.com/macros/s/AKfycbzWT4qtwjVQgW4Q0bfEcZr9vv2pUQy3waB7RPB2W96Bubh0FO7kJ_0rsL1GQxZnHUDj/exec";
 
             const submitBtn = document.getElementById("submitButton");
             const statusEl = document.getElementById("status");
 
-            // Start loading state (using Tailwind classes)
             statusEl.className = 'mt-6 text-center font-semibold pt-4 text-yellow-600';
             statusEl.textContent = "Processing Request...";
             submitBtn.disabled = true;
 
             try {
-                // Post data to the Google Sheets Apps Script
                 const res = await fetch(scriptURL, {
                     method: "POST",
-                    body: JSON.stringify(data),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
+                    body: data
+                    // No headers! Let browser set Content-Type for FormData
                 });
 
                 if (res.ok) {
-                    // Success message using Tailwind styling
                     statusEl.className = 'mt-6 text-center font-semibold pt-4 text-green-600';
                     statusEl.textContent = "✅ Request sent successfully and data saved to the sheet!";
                     form.reset();
                 } else {
-                    // Error message using Tailwind styling
                     statusEl.className = 'mt-6 text-center font-semibold pt-4 text-red-600';
                     statusEl.textContent = `❌ Submission failed. Server responded with status: ${res.status}`;
                 }
             } catch (error) {
-                // Network error message using Tailwind styling
                 statusEl.className = 'mt-6 text-center font-semibold pt-4 text-red-600';
                 statusEl.textContent = "❌ Submission failed. Please check your network connection.";
                 console.error("Error:", error);
             } finally {
                 submitBtn.disabled = false;
-                // Reset status text after 5 seconds
+                setTimeout(() => {
+                    statusEl.textContent = "Click 'Submit Request' to proceed.";
+                    statusEl.className = 'mt-6 text-center font-semibold pt-4 text-gray-500';
+                }, 5000);
+            }
+        });
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+  </script>
+</body>
+</html>
                 setTimeout(() => {
                     statusEl.textContent = "Click 'Submit Request' to proceed.";
                     statusEl.className = 'mt-6 text-center font-semibold pt-4 text-gray-500';

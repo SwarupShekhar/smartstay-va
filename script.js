@@ -43,13 +43,7 @@ if (propertyForm) {
     e.preventDefault();
 
     const form = e.target;
-    const data = {
-      name: form.name.value,
-      email: form.email.value,
-      property: form.property.value,
-      location: form.location.value,
-      services: form.services.value
-    };
+    const data = new FormData(form);
 
     const scriptURL = "https://script.google.com/macros/s/AKfycbzWT4qtwjVQgW4Q0bfEcZr9vv2pUQy3waB7RPB2W96Bubh0FO7kJ_0rsL1GQxZnHUDj/exec";
 
@@ -63,7 +57,8 @@ if (propertyForm) {
     try {
       const res = await fetch(scriptURL, {
         method: "POST",
-        body: JSON.stringify(data)
+        body: data
+        // No headers! Let browser set Content-Type for FormData
       });
 
       if (res.ok) {
@@ -83,6 +78,11 @@ if (propertyForm) {
       console.error("Error:", error);
     } finally {
       submitBtn.disabled = false;
+      submitBtn.textContent = "Submit";
+      setTimeout(() => { statusEl.textContent = ""; }, 5000);
+    }
+  });
+}
       submitBtn.textContent = "Submit";
       setTimeout(() => { statusEl.textContent = ""; }, 5000);
     }
