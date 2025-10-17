@@ -36,26 +36,59 @@
   <script src="script.js"></script>
 
   <!-- SERVICES PREVIEW -->
-  <section class="services" data-aos="fade-up">
-    <h2>Our Core Services</h2>
-    <div class="service-cards">
-      <div class="card" data-aos="fade-up" data-aos-delay="100">
-        <img src="https://img.icons8.com/color/96/000000/communication.png" alt="Guest Communication">
-        <h3>Guest Communication</h3>
-        <p>Prompt and professional messaging to ensure 5-star reviews.</p>
-      </div>
-      <div class="card" data-aos="fade-up" data-aos-delay="200">
-        <img src="https://img.icons8.com/color/96/000000/calendar.png" alt="Booking Management">
-        <h3>Booking Management</h3>
-        <p>Keep your calendars synced, organized, and optimized for bookings.</p>
-      </div>
-      <div class="card" data-aos="fade-up" data-aos-delay="300">
-        <img src="https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/kitchen.png" alt="Cleaning & Maintenance">
-        <h3>Cleaning & Maintenance</h3>
-        <p>Coordinate cleaners and maintenance without lifting a finger.</p>
+  <!-- ===== SERVICES / FLIP CARDS ===== -->
+<section class="services" id="services">
+  <h2>Our Core Services</h2>
+  <div class="service-cards">
+
+    <!-- CARD 1 -->
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <img src="https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Gemini_Generated_Image_za76dsza76dsza76.png" alt="24/7 Communication Icon">
+          <h3>Tired of Trading Your Sleep for Guest Messages?</h3>
+          <p>Late-night messages about lock codes or early morning maintenance ruining your rest?</p>
+        </div>
+        <div class="flip-back">
+          <h3>Guaranteed 24/7 Peace of Mind</h3>
+          <p>Our VAs handle all guest communication, check-ins, and urgent issues around the clock — so you can finally sleep soundly.</p>
+        </div>
       </div>
     </div>
-  </section>
+
+    <!-- CARD 2 -->
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <img src="https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Gemini_Generated_Image_7dau8w7dau8w7dau.png" alt="Task Overload Icon">
+          <h3>Drowning in Guest Coordination?</h3>
+          <p>Managing cleaners, check-ins, and maintenance while juggling bookings?</p>
+        </div>
+        <div class="flip-back">
+          <h3>We Handle It All</h3>
+          <p>Our VAs coordinate cleaning, maintenance, and scheduling flawlessly — keeping operations smooth and guests happy.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <img src="https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Gemini_Generated_Image_pbienepbienepbie.png" alt="Pricing Optimization Icon">
+          <h3>Revenue Not Keeping Up?</h3>
+          <p>Your listings aren’t performing, and pricing feels like a guessing game?</p>
+        </div>
+        <div class="flip-back">
+          <h3>Maximized Revenue, Zero Guesswork</h3>
+          <p>We use smart tools and expert monitoring to optimize your pricing, ensuring better occupancy and profit.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- END OF SERVICES / FLIP CARDS SECTION -->
 
   <!-- CTA -->
   <section class="cta" data-aos="zoom-in">
@@ -64,6 +97,16 @@
   </section>
 
   <!-- FOOTER -->
+  <footer>
+    &copy; 2025 SmartStay VA. All Rights Reserved.
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+  </script>
+</body>
+</html>
   <footer>
     &copy; 2025 SmartStay VA. All Rights Reserved.
   </footer>

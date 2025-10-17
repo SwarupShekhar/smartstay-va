@@ -15,6 +15,7 @@ h1, h2, h3 {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 /* ===== NAVIGATION ===== */
@@ -64,39 +65,11 @@ a {
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* ===== HERO SECTIONS ===== */
+/* ===== HERO SLIDESHOW ===== */
 .hero {
   position: relative;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  /* starting background image (opening image) */
-  background-image: url('https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Lucid_Origin_a_cinematic_photo_of_ultrarealistic_and_in_high_d_3.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  /* smooth fade */
-  transition: background-image 1s ease-in-out;
-  color: #fff;
   overflow: hidden;
-}
-
-.hero-overlay {
-  position: relative; /* overlay above slideshow */
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  background: rgba(0,0,0,0.3); /* optional: dark overlay */
-  padding: 0 20px;
-  color: #fff;
 }
 
 .hero-slideshow {
@@ -105,29 +78,65 @@ a {
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
   z-index: 1;
-  opacity: 1;
+}
+
+.hero-slideshow img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
   transition: opacity 1.5s ease-in-out;
 }
 
-.hero-small { height: 50vh; }
-
-.hero-overlay {
-  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.3));
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 1rem;
+.hero-slideshow img.active {
+  opacity: 1;
+  z-index: 2;
 }
 
-.hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-.hero p { font-size: 1.2rem; margin-bottom: 2rem; }
-.btn-hero { font-size: 1.1rem; }
+/* Overlay with text */
+.hero-overlay {
+  position: relative;
+  z-index: 3;
+  color: #fff;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+.hero-overlay h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+
+.hero-overlay p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.btn-hero {
+  font-size: 1.1rem;
+  padding: 0.8rem 1.6rem;
+  background: #ffce00;
+  color: #004aad;
+  font-weight: 700;
+  border-radius: 6px;
+  transition: all 0.3s;
+}
+
+.btn-hero:hover {
+  background: #fff;
+  color: #004aad;
+  transform: scale(1.05);
+}
 
 /* ===== SERVICES / CARDS ===== */
 .services {
@@ -136,13 +145,17 @@ a {
   background: linear-gradient(135deg, #f0f8ff, #e6f2ff);
 }
 
-.services h2 { font-size: 2rem; margin-bottom: 2rem; color: #004aad; }
+.services h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #004aad;
+}
 
 .service-cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  gap: 3rem 3.5rem; /* Increased horizontal and vertical gap for more space */
 }
 
 .service-cards .card {
@@ -159,15 +172,42 @@ a {
   box-shadow: 0 15px 25px rgba(0,0,0,0.2);
 }
 
-.service-cards .card img { width: 60px; margin-bottom: 1rem; }
-.service-cards .card h3 { color: #004aad; margin-bottom: 0.5rem; }
-.service-cards .card p, .service-cards .card ul { font-size: 0.95rem; color: #333; }
+.service-cards .card img {
+  width: 60px;
+  margin-bottom: 1rem;
+}
 
-/* Pricing card list */
-.service-cards .card ul { list-style: none; padding: 0; margin: 0 0 1rem 0; }
-.service-cards .card ul li { margin: 0.4rem 0; }
+.service-cards .card-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 1rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-/* ===== CTA ===== */
+.service-cards .card h3 {
+  color: #004aad;
+  margin-bottom: 0.5rem;
+}
+
+.service-cards .card p,
+.service-cards .card ul {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.service-cards .card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+
+.service-cards .card ul li {
+  margin: 0.4rem 0;
+}
+
+/* ===== CTA SECTION ===== */
 .cta {
   padding: 3rem 2rem;
   text-align: center;
@@ -189,10 +229,6 @@ a {
 }
 
 /* ===== FORM (hire.html) ===== */
-/* NOTE: All styling for #propertyForm, its labels, inputs, and the button 
-   is now handled entirely by Tailwind utility classes in hire.html. 
-   These rules are kept simple/default to avoid conflicting with Tailwind's classes.
-*/
 #propertyForm {
   max-width: 1500px;
   margin: 2rem auto;
@@ -221,7 +257,7 @@ a {
 
 #propertyForm button {
   margin-top: 1.5rem;
-  width: 100%; /* Added width back for non-tailwind elements */
+  width: 100%;
   background: #004aad;
   color: #fff;
   font-weight: 700;
@@ -231,7 +267,13 @@ a {
   padding: 0.8rem;
   border-radius: 5px;
 }
-/* The complex button styling is now purely in the HTML file's class list. */
+
+#propertyForm button:hover {
+  background: #ffce00;
+  color: #004aad;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
 
 /* ===== FOOTER ===== */
 footer {
@@ -243,19 +285,152 @@ footer {
   color: #555;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== FLIP CARD SECTION ===== */
+.services {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #f0f8ff, #e6f2ff);
+}
+
+.services h2 {
+  font-size: 2.3rem;
+  color: #004aad;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.service-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem 3.5rem; /* Increased horizontal and vertical gap for more space */
+}
+
+.flip-card {
+  background: transparent;
+  width: 320px;
+  height: 300px;
+  perspective: 1000px;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front, .flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  backface-visibility: hidden;
+  background: #fff;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.flip-front img {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 1rem;
+}
+
+.flip-front h3 {
+  color: #004aad;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.flip-front p {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.flip-back {
+  background: #004aad;
+  color: #fff;
+  transform: rotateY(180deg);
+}
+
+.flip-back h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.flip-back p {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #f0f0f0;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .service-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 @media (max-width: 1024px) {
-  .service-cards { gap: 1.5rem; }
+  .service-cards {
+    gap: 1.5rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .service-cards { flex-direction: column; align-items: center; }
-  .nav-container { flex-direction: column; gap: 1rem; }
+  .service-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .hero-overlay h1 {
+    font-size: 2.2rem;
+  }
 }
 
 @media (max-width: 480px) {
-  .hero h1 { font-size: 2rem; }
-  .hero p { font-size: 1rem; }
-  .service-cards .card { width: 90%; padding: 1.5rem; }
-  #propertyForm { padding: 1.5rem; }
+  .hero-overlay h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-overlay p {
+    font-size: 1rem;
+  }
+
+  .service-cards .card {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  #propertyForm {
+    padding: 1.5rem;
+  }
+}
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
