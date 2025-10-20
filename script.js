@@ -14,23 +14,22 @@ if (slideshow) {
 
   let current = 0;
 
+  // set initial visible background
+  slideshow.style.backgroundImage = `url('${backgrounds[0]}')`;
+  slideshow.style.opacity = 1;
+
   function nextBackground() {
     const next = (current + 1) % backgrounds.length;
-
-    // Fade out current
+    // fade out, switch image, fade in
     slideshow.style.opacity = 0;
-
     setTimeout(() => {
       slideshow.style.backgroundImage = `url('${backgrounds[next]}')`;
       slideshow.style.opacity = 1;
       current = next;
-    }, 1500); // matches CSS transition time
+    }, 500); // shorter timeout; CSS transition handles fade timing
   }
 
-  // Initial background
-  slideshow.style.backgroundImage = `url('${backgrounds[0]}')`;
-
-  // Change every 5 seconds
+  // start rotation
   setInterval(nextBackground, 5000);
 }
 
@@ -58,7 +57,6 @@ if (propertyForm) {
       const res = await fetch(scriptURL, {
         method: "POST",
         body: data
-        // No headers! Let browser set Content-Type for FormData
       });
 
       if (res.ok) {
@@ -81,6 +79,8 @@ if (propertyForm) {
       submitBtn.textContent = "Submit";
       setTimeout(() => { statusEl.textContent = ""; }, 5000);
     }
+  });
+}
   });
 }
       submitBtn.textContent = "Submit";
