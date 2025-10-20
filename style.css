@@ -85,8 +85,12 @@ a {
   background-position: center;
   background-repeat: no-repeat;
 
+  /* fallback background image & color so hero is never blank */
+  background-image: url('https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Lucid_Origin_a_cinematic_photo_of_ultrarealistic_and_in_high_d_3.jpg');
+  background-color: #111;
+
   /* fade transitions handled via opacity */
-  opacity: 0;
+  opacity: 1; /* visible by default (JS will control fades) */
   transition: opacity 1.5s ease-in-out, background-image 0.5s ease-in-out;
 }
 
