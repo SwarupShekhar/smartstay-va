@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   // =======================
-  // HERO BACKGROUND SLIDESHOW
+  // HERO SLIDESHOW (image elements, more reliable)
   // =======================
   const slideshow = document.querySelector('.hero-slideshow');
 
@@ -15,28 +15,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let current = 0;
 
-    // Ensure slideshow element shows background properly
-    slideshow.style.transition = 'opacity 1.5s ease-in-out';
-    slideshow.style.backgroundSize = 'cover';
-    slideshow.style.backgroundPosition = 'center';
-    slideshow.style.backgroundRepeat = 'no-repeat';
+    // create <img> elements and append to slideshow container
+    backgrounds.forEach((src, i) => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = `slide-${i}`;
+      img.loading = 'lazy';
+      if (i === 0) img.classList.add('active');
+      slideshow.appendChild(img);
+    });
 
-    // Initial background
-    slideshow.style.backgroundImage = `url('${backgrounds[0]}')`;
-    slideshow.style.opacity = '1';
+    const slides = slideshow.querySelectorAll('img');
 
-    function nextBackground() {
-      const next = (current + 1) % backgrounds.length;
-      slideshow.style.opacity = '0';
-      setTimeout(() => {
-        slideshow.style.backgroundImage = `url('${backgrounds[next]}')`;
-        slideshow.style.opacity = '1';
-        current = next;
-      }, 1500); // matches CSS transition time
+    // ensure CSS transitions are honored
+    slideshow.style.backgroundImage = 'none';
+
+    function nextSlide() {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
     }
 
-    // Change every 5 seconds
-    setInterval(nextBackground, 5000);
+    const intervalId = setInterval(nextSlide, 5000);
+
+    // optional: stop when element removed
+    const observer = new MutationObserver(() => {
+      if (!document.body.contains(slideshow)) {
+        clearInterval(intervalId);
+        observer.disconnect();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
   }
 
   // =======================
