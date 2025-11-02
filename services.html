@@ -8,6 +8,7 @@
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 <body>
+  <!-- NAVBAR -->
   <nav class="nav">
     <div class="nav-container">
       <div class="logo"><a href="index.html">SmartStay VA</a></div>
@@ -21,6 +22,7 @@
     </div>
   </nav>
 
+  <!-- HERO SECTION -->
   <section class="hero hero-small">
     <div class="hero-slideshow"></div>
     <div class="hero-overlay" data-aos="fade-down">
@@ -28,41 +30,84 @@
     </div>
   </section>
 
-  <section class="services">
-    <h2 data-aos="fade-up">What We Offer</h2>
-    <div class="service-cards">
-      <div class="card" data-aos="fade-up" data-aos-delay="100">
-        <img src="https://img.icons8.com/color/96/000000/communication.png" alt="Guest Communication">
-        <h3>Guest Communication</h3>
-        <p>Answer messages, inquiries, and booking questions professionally.</p>
-      </div>
-      <div class="card" data-aos="fade-up" data-aos-delay="200">
-        <img src="https://img.icons8.com/color/96/000000/calendar.png" alt="Booking Management">
-        <h3>Booking Management</h3>
-        <p>Manage your calendars, reservations, and optimize for maximum occupancy.</p>
-      </div>
-      <div class="card" data-aos="fade-up" data-aos-delay="300">
-        <img src="https://img.icons8.com/color/96/000000/cleaning.png" alt="Cleaning & Maintenance">
-        <h3>Cleaning & Maintenance</h3>
-        <p>Coordinate cleaners, maintenance requests, and property upkeep seamlessly.</p>
-      </div>
-      <div class="card" data-aos="fade-up" data-aos-delay="400">
-        <img src="https://img.icons8.com/color/96/000000/money.png" alt="Financial Management">
-        <h3>Financial Management</h3>
-        <p>Track income, expenses, and reports to keep your rental business organized.</p>
-      </div>
+  <!-- ===== SERVICES / "Services That We Offer" (replaces previous .services block) ===== -->
+  <div class="slideshow" aria-hidden="true">
+    <img src="https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Lucid_Origin_a_cinematic_photo_of_ultrarealistic_and_in_high_d_3.jpg" alt="">
+    <img src="https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Lucid_Origin_a_cinematic_photo_of_ultrarealistic_and_high_defi_3.jpg" alt="">
+    <img src="https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Lucid_Origin_a_cinematic_photo_of_ultrarealistic_and_high_defi_2.jpg" alt="">
+    <img src="https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Lucid_Origin_a_cinematic_photo_of_ultrarealistic_and_high_defi_1.jpg" alt="">
+  </div>
+
+  <section class="services-container" aria-labelledby="services-offer-title">
+    <h2 id="services-offer-title" style="width:100%; text-align:center; color:#fff; margin-bottom:1.5rem; font-size:2rem;">Services That We Offer</h2>
+
+    <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+      <img src="https://img.icons8.com/color/96/000000/communication.png" alt="Guest Communication">
+      <h3>24/7 Guest Communication</h3>
+      <p>Respond instantly to guest messages, inquiries, and emergencies at any time.</p>
+    </div>
+
+    <div class="service-card" data-aos="fade-up" data-aos-delay="150">
+      <img src="https://img.icons8.com/color/96/000000/calendar.png" alt="Booking Management">
+      <h3>Booking Management</h3>
+      <p>Handle reservations, cancellations, and ensure calendars are always updated.</p>
+    </div>
+
+    <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+      <img src="https://img.icons8.com/color/96/000000/cleaning.png" alt="Cleaning & Maintenance">
+      <h3>Cleaning & Maintenance</h3>
+      <p>Coordinate housekeeping, inspections, and timely maintenance between stays.</p>
+    </div>
+
+    <div class="service-card" data-aos="fade-up" data-aos-delay="250">
+      <img src="https://img.icons8.com/color/96/000000/checkmark.png" alt="Check-in/Check-out Support">
+      <h3>Check-in / Check-out Support</h3>
+      <p>Assist guests with smooth arrivals and departures, including key exchanges.</p>
+    </div>
+
+    <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+      <img src="https://img.icons8.com/color/96/000000/map.png" alt="Welcome & Local Guides">
+      <h3>Welcome & Local Guides</h3>
+      <p>Provide personalized welcome instructions and local area recommendations.</p>
+    </div>
+
+    <div class="service-card" data-aos="fade-up" data-aos-delay="350">
+      <img src="https://img.icons8.com/color/96/000000/box.png" alt="Inventory & Supplies">
+      <h3>Inventory & Supplies</h3>
+      <p>Monitor stock levels and ensure all essentials are ready for each guest.</p>
+    </div>
+
+    <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+      <img src="https://img.icons8.com/color/96/000000/price-tag.png" alt="Pricing & Revenue">
+      <h3>Pricing & Revenue Optimization</h3>
+      <p>Adjust nightly rates and optimize occupancy to maximize revenue.</p>
+    </div>
+
+    <div class="service-card" data-aos="fade-up" data-aos-delay="450">
+      <img src="https://img.icons8.com/color/96/000000/megaphone.png" alt="Property Marketing">
+      <h3>Property Marketing</h3>
+      <p>Promote listings across platforms with professional descriptions and photos.</p>
+    </div>
+
+    <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+      <img src="https://img.icons8.com/color/96/000000/report-card.png" alt="Issue Resolution">
+      <h3>Issue Resolution</h3>
+      <p>Resolve complaints or incidents quickly to maintain guest satisfaction.</p>
     </div>
   </section>
 
+  <!-- CALL TO ACTION SECTION -->
   <section class="cta" data-aos="zoom-in">
     <h2>Interested in any of these services?</h2>
     <a href="hire.html" class="btn btn-cta">Hire Your VA Today</a>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     &copy; 2025 SmartStay VA. All Rights Reserved.
   </footer>
 
+  <script src="script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 1000, once: true });

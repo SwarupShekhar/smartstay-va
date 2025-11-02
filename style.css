@@ -65,6 +65,27 @@ a {
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
+/* ===== HERO SECTIONS ===== */
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* NEW: smaller hero for subpages (services/pricing/about/hire) */
+.hero-small {
+  height: 50vh;
+  min-height: 320px; /* keeps layout sane on very small screens */
+}
+
+/* Slightly tighter overlay padding for small hero */
+.hero-small .hero-overlay {
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ===== HERO SLIDESHOW ===== */
 .hero {
   position: relative;
@@ -388,20 +409,93 @@ footer {
   color: #f0f0f0;
 }
 
+/* ===== SERVICES GRID + BACKGROUND SLIDESHOW (per reference) ===== */
+.slideshow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none; /* allow clicks through to page elements */
+}
+
+.slideshow img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: slideShow 20s infinite;
+}
+
+.slideshow img:nth-child(1) { animation-delay: 0s; }
+.slideshow img:nth-child(2) { animation-delay: 5s; }
+.slideshow img:nth-child(3) { animation-delay: 10s; }
+.slideshow img:nth-child(4) { animation-delay: 15s; }
+
+@keyframes slideShow {
+  0% { opacity: 0; }
+  5% { opacity: 1; }
+  25% { opacity: 1; }
+  30% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Services grid overlaying slideshow */
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  padding: 220px 80px 100px; /* leaves space for nav/hero above */
+  position: relative;
+  z-index: 10;
+  color: #fff;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.service-card {
+  background: rgba(0,0,0,0.6);
+  border-radius: 12px;
+  padding: 25px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s forwards;
+}
+
+.service-card img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 15px;
+}
+
+.service-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.6rem;
+  color: #ffce00;
+}
+
+.service-card p {
+  font-size: 0.95rem;
+  color: #fff;
+  margin: 0;
+}
+
+.service-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.45);
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* Responsive behavior */
-@media (max-width: 768px) {
-  .service-cards {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-@media (max-width: 1024px) {
-  .service-cards {
-    gap: 1.5rem;
-  }
-}
-
 @media (max-width: 768px) {
   .service-cards {
     flex-direction: column;
@@ -435,6 +529,15 @@ footer {
   #propertyForm {
     padding: 1.5rem;
   }
+}
+
+@media (max-width: 1024px) {
+  .services-container { grid-template-columns: repeat(2,1fr); padding: 180px 40px 80px; }
+}
+
+@media (max-width: 768px) {
+  .services-container { grid-template-columns: 1fr; padding: 160px 20px 60px; }
+  .slideshow { display: none; } /* hide full-screen slideshow on small screens for readability */
 }
 /* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
