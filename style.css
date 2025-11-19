@@ -27,6 +27,7 @@ a {
   z-index: 10;
 }
 
+
 .nav-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -365,7 +366,7 @@ footer {
   height: 100%;
   border-radius: 15px;
   backface-visibility: hidden;
-  background: #fff;
+  background: #ffffff;
   box-shadow: 0 6px 15px rgba(0,0,0,0.1);
   padding: 1.5rem;
   display: flex;
@@ -376,8 +377,8 @@ footer {
 }
 
 .flip-front img {
-  width: 70px;
-  height: 70px;
+  width: 165px;
+  height: 1650px;
   margin-bottom: 1rem;
 }
 

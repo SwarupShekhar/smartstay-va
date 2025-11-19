@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SmartStay VA - Checkout</title>
+  <style>
+    :root{ --brand:#0b5ed7; --muted:#6b7280; --accent:#ffcb05; --radius:12px; --shadow:0 12px 30px rgba(9,30,66,0.06); }
+    html,body{height:100%; margin:0; font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial; background:linear-gradient(180deg,#eef6ff,#ffffff); color:#0f172a; }
+    .container{max-width:960px; margin:36px auto; padding:20px; display:grid; grid-template-columns:1fr 420px; gap:22px; align-items:start;}
+    @media (max-width:880px){ .container{grid-template-columns:1fr; padding:16px;} }
+    .card{background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); padding:22px;}
+    .hero{display:flex; align-items:center; gap:12px; margin-bottom:8px;}
+    .logo-circle{width:48px; height:48px; border-radius:10px; background:linear-gradient(90deg,#0b5ed7,#0756d9); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:18px;}
+    h1{margin:0; color:var(--brand); font-size:20px;}
+    .plan-box{border-radius:10px; padding:14px; background:#fbfdff; border:1px solid #eef6ff; margin-bottom:14px;}
+    .plan-title{font-weight:800; color:var(--brand); font-size:18px; margin:0 0 6px;}
+    .plan-price{font-size:20px; font-weight:900; color:#0b3ea8;}
+    .input{width:100%; padding:10px 12px; border-radius:8px; border:1px solid #e6eefb; font-size:15px; margin-bottom:12px; box-sizing:border-box;}
+    .row{display:flex; gap:10px;}
+    .btn{padding:10px 14px; border-radius:10px; font-weight:800; cursor:pointer; border:0;}
+    .btn-primary{background:var(--brand); color:white;}
+    .btn-ghost{background:white; border:2px solid var(--brand); color:var(--brand);}
+    .spinner{width:18px; height:18px; border-radius:50%; border:3px solid rgba(255,255,255,0.2); border-top-color:white; animation:spin .9s linear infinite; display:inline-block; vertical-align:middle; margin-right:8px;}
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .success{padding:18px; border-radius:10px; background:linear-gradient(90deg,#e6ffef,#f7fff9); border:1px solid #daf6e6; color:#0b6b3f; font-weight:800;}
+    .error{color:#b91c1c; font-weight:700; font-size:13px; margin-top:6px;}
+    footer.note{grid-column:1/-1; text-align:center; margin-top:18px; color:var(--muted); font-size:13px;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card" aria-labelledby="checkoutTitle">
+      <div class="hero">
+        <div class="logo-circle">SS</div>
+        <div>
+          <h1 id="checkoutTitle">Secure Checkout</h1>
+          <p class="lead" style="margin:8px 0 0; color:var(--muted);">Complete your plan selection. This is a mock payment page for testing only.</p>
+        </div>
+      </div>
+
+      <div class="plan-box" id="planBox" aria-live="polite">
+        <div class="plan-title" id="planName">Plan: -</div>
+        <div class="plan-price" id="planPrice">Price: -</div>
+        <div class="small" id="billingNote" style="color:var(--muted); margin-top:8px;"></div>
+      </div>
+
+      <form id="checkoutForm" novalidate>
+        <div><label for="cardName">Cardholder name</label><input id="cardName" class="input" type="text" autocomplete="cc-name" placeholder="Full name on card" required /></div>
+        <div><label for="cardNumber">Card number</label><input id="cardNumber" class="input" inputmode="numeric" placeholder="4242 4242 4242 4242" maxlength="23" autocomplete="cc-number" /></div>
+        <div class="row">
+          <div style="flex:1;">
+            <label for="cardExpiry">Expiry (MM/YY)</label>
+            <input id="cardExpiry" class="input" placeholder="MM/YY" maxlength="5" inputmode="numeric" autocomplete="cc-exp" />
+          </div>
+          <div style="width:120px;">
+            <label for="cardCvc">CVC</label>
+            <input id="cardCvc" class="input" placeholder="123" maxlength="4" inputmode="numeric" autocomplete="cc-csc" />
+          </div>
+        </div>
+
+        <div id="formError" class="error" role="alert" style="display:none;"></div>
+
+        <div style="display:flex; gap:12px; align-items:center; margin-top:10px;">
+          <button id="payNow" type="button" class="btn btn-primary">Pay now</button>
+          <button id="goBack" type="button" class="btn btn-ghost">Go back</button>
+          <div style="flex:1;"></div>
+        </div>
+
+        <div style="margin-top:12px; color:var(--muted); font-size:13px;">This is a demo checkout. No real payment will be collected.</div>
+      </form>
+    </div>
+
+    <div class="card" aria-labelledby="summaryTitle">
+      <h2 id="summaryTitle" style="margin:0 0 8px; color:var(--brand);">Order summary</h2>
+      <div style="margin-bottom:12px; color:var(--muted);">You selected the plan below. Confirm details and proceed to payment.</div>
+
+      <div class="plan-box" style="margin-bottom:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div id="summaryPlanName" style="font-weight:800; color:#0b3ea8;">-</div>
+            <div class="small" id="summaryPlanDesc">-</div>
+          </div>
+          <div id="summaryPlanPrice" style="font-size:18px; font-weight:900; color:var(--brand);">-</div>
+        </div>
+      </div>
+
+      <div style="margin-top:8px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+          <div class="small">Subtotal</div>
+          <div id="subtotal" style="font-weight:800;">-</div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+          <div class="small">Taxes (example)</div>
+          <div id="taxes" style="font-weight:800;">-</div>
+        </div>
+
+        <hr style="border:none; border-top:1px solid #eef6ff; margin:12px 0;" />
+
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div class="small">Total</div>
+          <div id="total" style="font-size:18px; font-weight:900; color:var(--brand);">-</div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px; color:var(--muted); font-size:13px;">Have questions? Email support@smartstay.example</div>
+    </div>
+
+    <footer class="note">This checkout is a mock page for development and testing. Replace with a real payment integration before accepting payments in production.</footer>
+  </div>
+
+<script>
+(function(){
+  // read query params
+  const params = new URLSearchParams(window.location.search);
+  const planParam = params.get('plan') || 'Basic';
+  const billingParam = (params.get('billing') === 'annual') ? 'annual' : 'monthly';
+  const bookingsParam = Number(params.get('bookings')) || 0;
+  const avgParam = Number(params.get('avg')) || 0;
+  const BILLING_MULTIPLIER = billingParam === 'annual' ? (1 - 0.15) : 1; // 15% off for annual
+
+  // plan definitions with monthly base
+  const PLAN_BASE = {
+    Basic: 100,
+    Growth: 200,
+    Premium: 300,
+    Commission: 0,
+    Hybrid: 50
+  };
+
+  function currency(n){
+    if(typeof n !== 'number' || isNaN(n)) return '-';
+    return '$' + (Math.round(n*100)/100).toLocaleString();
+  }
+
+  // determine plan details based on billing mode
+  const planKey = PLAN_BASE.hasOwnProperty(planParam) ? planParam : 'Basic';
+
+  // dom
+  const planNameEl = document.getElementById('planName');
+  const planPriceEl = document.getElementById('planPrice');
+  const billingNote = document.getElementById('billingNote');
+  const summaryPlanName = document.getElementById('summaryPlanName');
+  const summaryPlanDesc = document.getElementById('summaryPlanDesc');
+  const summaryPlanPrice = document.getElementById('summaryPlanPrice');
+  const subtotalEl = document.getElementById('subtotal');
+  const taxesEl = document.getElementById('taxes');
+  const totalEl = document.getElementById('total');
+
+  const formError = document.getElementById('formError');
+  const cardName = document.getElementById('cardName');
+  const cardNumber = document.getElementById('cardNumber');
+  const cardExpiry = document.getElementById('cardExpiry');
+  const cardCvc = document.getElementById('cardCvc');
+  const payNow = document.getElementById('payNow');
+  const goBack = document.getElementById('goBack');
+
+  // compute price display
+  function computeDisplayForPlan(key){
+    if(key === 'Commission'){
+      return { label: 'Commission', priceText: '12% of gross bookings', subtotal: 0, details: `Commission model - example rate 12% of gross revenue` };
+    }
+    if(key === 'Hybrid'){
+      // hybrid has base + % - for simplicity show base adjusted by billing multiplier and show note about commission
+      const monthlyBase = PLAN_BASE[key];
+      const baseAdj = Math.round(monthlyBase * BILLING_MULTIPLIER);
+      return { label: 'Hybrid', priceText: `${currency(baseAdj)} per month + 8% commission`, subtotal: baseAdj, details: `Base ${currency(baseAdj)} / mo plus 8% commission on gross` };
+    }
+    // For standard fixed plans
+    const monthlyBase = PLAN_BASE[key];
+    const monthlyAdj = Math.round(monthlyBase * BILLING_MULTIPLIER);
+    const yearlyTotal = monthlyAdj * 12;
+    if(billingParam === 'annual'){
+      return {
+        label: key,
+        priceText: `${currency(monthlyAdj)} per month (billed yearly)`,
+        subtotal: monthlyAdj,
+        details: `Billed yearly: ${currency(yearlyTotal)} total - you save 15%`
+      };
+    } else {
+      return {
+        label: key,
+        priceText: `${currency(monthlyBase)} per month`,
+        subtotal: monthlyBase,
+        details: `Billed monthly`
+      };
+    }
+  }
+
+  const display = computeDisplayForPlan(planKey);
+
+  // show on page
+  planNameEl.textContent = 'Plan: ' + display.label;
+  planPriceEl.textContent = 'Price: ' + display.priceText;
+  billingNote.textContent = display.details;
+  summaryPlanName.textContent = display.label;
+  summaryPlanDesc.textContent = display.priceText;
+  summaryPlanPrice.textContent = display.priceText;
+
+  // taxes example only for numeric subtotal
+  const subtotal = Number(display.subtotal) || 0;
+  const taxRate = subtotal > 0 ? 0.12 : 0; // example tax 12%
+  const taxes = Math.round(subtotal * taxRate * 100) / 100;
+  const total = (subtotal > 0) ? Math.round((subtotal + taxes) * 100) / 100 : display.priceText;
+
+  subtotalEl.textContent = subtotal > 0 ? currency(subtotal) : '-';
+  taxesEl.textContent = taxes > 0 ? currency(taxes) : '-';
+  totalEl.textContent = (typeof total === 'number') ? currency(total) : total;
+
+  // show bookings context if present (for commission view)
+  if(bookingsParam > 0 && avgParam > 0){
+    const gross = bookingsParam * avgParam;
+    const commissionExample = gross * 0.12;
+    const ctxEl = document.createElement('div');
+    ctxEl.style.marginTop = '10px';
+    ctxEl.style.color = '#475569';
+    ctxEl.textContent = 'Context: estimated gross from inputs ' + currency(gross) + '. Example commission at 12%: ' + currency(commissionExample) + '.';
+    document.querySelector('.plan-box').appendChild(ctxEl);
+  }
+
+  // simple masking helpers
+  function onlyDigits(s){ return String(s).replace(/\D/g,''); }
+  cardNumber.addEventListener('input', (e) => {
+    const raw = onlyDigits(e.target.value).slice(0,19);
+    const parts = [];
+    for(let i=0;i<raw.length;i+=4) parts.push(raw.slice(i,i+4));
+    e.target.value = parts.join(' ');
+  });
+  cardExpiry.addEventListener('input', (e) => {
+    let v = onlyDigits(e.target.value).slice(0,4);
+    if(v.length >= 3) v = v.slice(0,2) + '/' + v.slice(2);
+    e.target.value = v;
+  });
+  cardCvc.addEventListener('input', (e) => { e.target.value = onlyDigits(e.target.value).slice(0,4); });
+
+  // validation
+  function validateForm(){
+    formError.style.display = 'none';
+    const errors = [];
+    if(!cardName.value.trim()) errors.push('Enter cardholder name.');
+    const num = onlyDigits(cardNumber.value);
+    if(num.length < 13 || num.length > 19) errors.push('Enter a valid card number.');
+    const exp = cardExpiry.value.split('/');
+    if(exp.length !== 2 || exp[0].length !== 2 || exp[1].length !== 2) errors.push('Enter expiry in MM/YY format.');
+    else {
+      const mm = parseInt(exp[0],10); const yy = parseInt(exp[1],10);
+      if(isNaN(mm) || isNaN(yy) || mm < 1 || mm > 12) errors.push('Enter a valid expiry month.');
+      else {
+        const fullYear = 2000 + yy;
+        const endOfMonth = new Date(fullYear, mm, 1);
+        const now = new Date();
+        if(endOfMonth <= now) errors.push('Card looks expired.');
+      }
+    }
+    const cvc = onlyDigits(cardCvc.value);
+    if(cvc.length < 3 || cvc.length > 4) errors.push('Enter a valid CVC.');
+    return errors;
+  }
+
+  function setProcessing(on){
+    if(on){ payNow.disabled = true; payNow.innerHTML = '<span class="spinner" aria-hidden="true"></span> Processing'; }
+    else { payNow.disabled = false; payNow.textContent = 'Pay now'; }
+  }
+
+  payNow.addEventListener('click', function(){
+    const errs = validateForm();
+    if(errs.length){ formError.style.display = 'block'; formError.textContent = errs[0]; return; }
+    formError.style.display = 'none';
+    setProcessing(true);
+    setTimeout(() => {
+      setProcessing(false);
+      const leftCard = document.querySelectorAll('.card')[0];
+      leftCard.innerHTML = `
+        <div style="display:flex; gap:12px; align-items:center;">
+          <div style="width:48px; height:48px; border-radius:10px; background:linear-gradient(90deg,#0b5ed7,#0756d9); color:white; display:flex; align-items:center; justify-content:center; font-weight:800;">SS</div>
+          <div>
+            <h2 style="margin:0; color:var(--brand);">Payment complete</h2>
+            <div style="color:#0b6b3f; font-weight:800; margin-top:6px;">Thank you. Your subscription is active.</div>
+          </div>
+        </div>
+        <div style="margin-top:18px;">
+          <div style="margin-bottom:10px;">Plan: <strong>${display.label}</strong></div>
+          <div style="margin-bottom:18px;">Amount: <strong>${display.priceText}</strong></div>
+          <div style="margin-top:12px;" class="success">Payment simulated successfully. This is a mock transaction.</div>
+          <div style="margin-top:16px; display:flex; gap:10px;">
+            <button class="btn btn-primary" id="doneBtn">Done</button>
+            <button class="btn btn-ghost" id="receiptBtn">View receipt</button>
+          </div>
+        </div>
+      `;
+      document.getElementById('doneBtn').addEventListener('click', () => { window.location.href = 'pricing.html'; });
+      document.getElementById('receiptBtn').addEventListener('click', () => { alert('Receipt: This is a placeholder receipt for mock payment.'); });
+    }, 1200);
+  });
+
+  goBack.addEventListener('click', function(){ window.location.href = 'pricing.html'; });
+
+})();
+</script>
+</body>
+</html>

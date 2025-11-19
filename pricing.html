@@ -1,78 +1,592 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmartStay VA | Pricing</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SmartStay VA - Pricing</title>
+  <style>
+    :root{ --nav-height:72px; --nav-bg:#fff; --brand:#0b5ed7; --muted:#6b7280; }
+    body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial;background:linear-gradient(180deg,#f4f8fc,#ffffff); color:#0f172a;}
+    a{color:inherit;text-decoration:none;}
+    header.site-header{position:sticky; top:0; background:var(--nav-bg); z-index:140; box-shadow: 0 1px 0 rgba(16,24,40,0.03);}
+    .nav-wrap{max-width:1200px;margin:0 auto; height:var(--nav-height); display:flex; align-items:center; justify-content:space-between; padding:0 20px;}
+    .brand{font-weight:700;color:var(--brand); font-size:18px;}
+    nav.primary{display:flex; gap:18px; align-items:center;}
+    nav.primary a{padding:10px 8px; color:var(--brand); font-weight:700;}
+    nav.primary a:hover{opacity:0.85;}
+    @media (max-width:720px){ nav.primary{gap:10px;} }
+    /* rest of styling kept as in your design */
+  </style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="nav-container">
-      <div class="logo"><a href="index.html">SmartStay VA</a></div>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="about.html">About</a>
-        <a href="hire.html">Hire</a>
+
+  <header class="site-header" role="banner">
+    <div class="nav-wrap">
+      <div class="brand"><a href="./index.html">SmartStay VA</a></div>
+      <nav class="primary" role="navigation" aria-label="Main navigation">
+        <a href="./index.html">Home</a>
+        <a href="./services.html">Services</a>
+        <a href="./pricing.html" aria-current="page">Pricing</a>
+        <a href="./about.html">About</a>
+        <a id="navHire" href="file:///Users/swarupshekhar/STR_VA/smartstay-va/hire.html">Hire</a>
+      </nav>
+    </div>
+  </header>
+
+<section id="pricing" aria-labelledby="pricing-heading" class="pricing-section">
+  <style>
+    :root{
+      --card-bg:#ffffff; --primary:#0b5ed7; --accent:#ffcb05; --muted:#6b7280; --radius:14px; --max-width:1200px; --ease:cubic-bezier(.2,.9,.2,1);
+    }
+    .pricing-section{background:linear-gradient(180deg,#eef6ff 0%, #f7fbff 100%); padding:56px 20px 48px; color:#0f172a;}
+    .wrap{max-width:var(--max-width); margin:0 auto; text-align:center;}
+    h2#pricing-heading{font-size:36px; color:var(--primary); margin:6px 0;}
+    p.sub{color:var(--muted); margin:0 0 18px;}
+    .billing-toggle{display:inline-flex; gap:12px; align-items:center; margin:18px auto 28px; background:rgba(11,94,215,0.04); padding:6px 8px; border-radius:999px;}
+    .toggle{width:56px; height:30px; border-radius:999px; background:white; border:1px solid rgba(16,24,40,0.06); position:relative; cursor:pointer; padding:3px; display:inline-flex; align-items:center;}
+    .toggle .knob{width:22px; height:22px; border-radius:50%; background:var(--primary); transform:translateX(0); transition:transform .22s var(--ease);}
+    .toggle[aria-pressed="true"] .knob{transform:translateX(26px); background:var(--accent);}
+
+    .cards{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:8px; text-align:left;}
+    @media (max-width:980px){ .cards{grid-template-columns:repeat(2,1fr);} }
+    @media (max-width:640px){ .cards{grid-template-columns:1fr;} .pricing-section{padding:34px 12px;} h2#pricing-heading{font-size:28px;} }
+
+    .card{background:var(--card-bg); border-radius:var(--radius); padding:22px; box-shadow:0 12px 28px rgba(11,78,215,0.06); position:relative;}
+    .badge{position:absolute; top:-12px; right:-12px; background:var(--accent); color:#07204b; padding:8px 12px; border-radius:10px; font-weight:800;}
+    .price{margin:18px 0 8px;}
+    .price .amount{font-size:34px; font-weight:900; color:#0b3ea8;}
+    .features{list-style:none; padding:0; margin:12px 0 18px;}
+    .cta-wrap{display:flex; gap:10px; align-items:center;}
+    .cta{border-radius:8px; padding:10px 14px; font-weight:700; cursor:pointer; border:0; }
+    .cta-primary{background:var(--primary); color:white;}
+    .cta-outline{background:transparent; color:var(--primary); border:2px solid rgba(11,78,215,0.08);}
+    .calc-panel{margin:28px auto 0; max-width:var(--max-width); background:linear-gradient(180deg,#ffffff,#fbfdff); border-radius:12px; padding:18px; box-shadow:0 12px 30px rgba(9,30,66,0.06); text-align:left;}
+    .calc-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+    @media (max-width:820px){ .calc-grid{grid-template-columns:1fr;} }
+    .calc-row{display:flex; flex-direction:column; gap:6px;}
+    .calc-row input, .calc-row select{padding:10px; border-radius:8px; border:1px solid #e6eefb; font-size:15px;}
+    .calc-results{display:flex; gap:12px; margin-top:14px; flex-wrap:wrap;}
+    .result-card{flex:1; min-width:200px; background:#f8fbff; padding:12px; border-radius:10px; font-weight:700; color:#0b3ea8;}
+    .chart-wrap{margin-top:12px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;}
+    canvas{background:white; border: radius 12px; box-shadow:0 6px 18px rgba(11,78,215,0.04);}
+    .cta-strip{margin:28px 0 0; background:linear-gradient(90deg,var(--primary),#0756d9); color:rgb(255, 255, 255); padding:30px 20px; border-radius:12px; display:flex; justify-content:space-between; align-items:center; gap:20px;}
+    .strip-cta{background:var(--accent); color:#07204b; padding:10px 16px; border-radius:8px; font-weight:800;}
+    .tiny{font-size:13px; color:var(--muted);}
+    .selected-plan { box-shadow: 0 30px 60px rgba(11,78,215,0.12) !important; transform: translateY(-8px) !important; border: 2px solid rgba(11,78,215,0.10) !important; }
+  </style>
+
+  <div class="wrap">
+    <h2 id="pricing-heading">Flexible Pricing for Every Host From DIY to Full Service</h2>
+    <p class="sub">Monthly, annual, commission, or hybrid - interactive calculator included so you can see exactly what you keep.</p>
+
+    <div class="billing-toggle" role="tablist" aria-label="Billing frequency">
+      <span class="label">Monthly</span>
+      <button id="billingToggle" class="toggle" aria-pressed="false" title="Toggle annual billing (save 15%)" aria-label="Toggle billing frequency">
+        <span class="knob" aria-hidden="true"></span>
+      </button>
+      <span class="label">Annual <span class="small">(-15%)</span></span>
+    </div>
+
+    <div class="cards" role="list" aria-label="Pricing plans">
+      <article class="card" role="listitem" aria-labelledby="plan-basic" tabindex="0" data-anim-delay="1">
+        <header><h3 id="plan-basic">Basic</h3><div class="muted">Essential host admin</div></header>
+        <div class="price" data-month="100" data-plan="Basic">
+          <div class="price-value"><span class="currency">$</span><span class="amount amount-anim" aria-live="polite">100</span><span class="period">/mo</span></div>
+          <div class="ann-label" aria-hidden="true"></div>
+        </div>
+        <ul class="features"><li>Guest communication</li><li>Booking management</li><li>Email support</li><li>Monthly summary report</li></ul>
+        <div class="cta-wrap">
+          <button class="cta cta-outline" data-plan="Basic" aria-label="Select Basic plan">Choose Basic</button>
+          <button class="cta" id="calcBasic" aria-label="Compare Basic plan">Compare</button>
+        </div>
+        <div class="tiny">Best for 1-2 properties</div>
+      </article>
+
+      <article class="card recommended" role="listitem" aria-labelledby="plan-growth" tabindex="0" data-anim-delay="2">
+        <div class="badge">Most popular</div>
+        <header><h3 id="plan-growth">Growth</h3><div class="muted">Scale with confidence</div></header>
+        <div class="price" data-month="200" data-plan="Growth">
+          <div class="price-value"><span class="currency">$</span><span class="amount amount-anim" aria-live="polite">200</span><span class="period">/mo</span></div>
+          <div class="ann-label" aria-hidden="true"></div>
+        </div>
+        <ul class="features"><li>All Basic features</li><li>Cleaning coordination</li><li>Listing optimization</li><li>Financial tracking</li></ul>
+        <div class="cta-wrap">
+          <button class="cta cta-primary" data-plan="Growth" aria-label="Select Growth plan">Start Growth</button>
+          <button class="cta" id="calcGrowth" aria-label="Compare Growth plan">Compare</button>
+        </div>
+        <div class="tiny">Best for hosts scaling to multiple properties</div>
+      </article>
+
+      <article class="card" role="listitem" aria-labelledby="plan-premium" tabindex="0" data-anim-delay="3">
+        <header><h3 id="plan-premium">Premium</h3><div class="muted">Full Service operations</div></header>
+        <div class="price" data-month="300" data-plan="Premium">
+          <div class="price-value"><span class="currency">$</span><span class="amount amount-anim" aria-live="polite">300</span><span class="period">/mo</span></div>
+          <div class="ann-label" aria-hidden="true"></div>
+        </div>
+        <ul class="features"><li>All Growth features</li><li>Maintenance coordination</li><li>Revenue optimization</li><li>Priority 24/7 support</li></ul>
+        <div class="cta-wrap">
+          <button class="cta cta-outline" data-plan="Premium" aria-label="Select Premium plan">Choose Premium</button>
+          <button class="cta" id="calcPremium" aria-label="Compare Premium plan">Compare</button>
+        </div>
+        <div class="tiny">Best for portfolio owners</div>
+      </article>
+    </div>
+
+    <div style="max-width:var(--max-width); margin:18px auto 0; display:flex; gap:18px; justify-content:center; flex-wrap:wrap;">
+      <div class="card" style="max-width:360px; width:100%;" aria-label="Commission plan" data-anim-delay="1">
+        <header><h3>Commission</h3><div class="muted">No monthly fee - pay per booking</div></header>
+        <div class="price" data-month="0" data-plan="Commission">
+          <div class="price-value"><span class="amount">12%</span><span class="period"> of gross bookings</span></div>
+        </div>
+        <ul class="features"><li>Full-service ops</li><li>Guest support & booking handling</li><li>Cleaning & maintenance coordination</li></ul>
+        <div class="cta-wrap">
+          <button class="cta cta-outline" id="commissionCTA">Pay by performance</button>
+          <button class="cta" id="calcCommission">Calculate</button>
+        </div>
+        <div class="meta-note">Default example rate: <strong>12%</strong>. Can be adjusted per contract.</div>
+      </div>
+
+      <div class="card" style="max-width:360px; width:100%;" aria-label="Hybrid plan" data-anim-delay="2">
+        <header><h3>Hybrid</h3><div class="muted">Lower base + shared upside</div></header>
+        <div class="price" data-month="50" data-plan="Hybrid">
+          <div class="price-value"><span class="currency">$</span><span class="amount amount-anim" aria-live="polite">50</span><span class="period">/mo + 8%</span></div>
+        </div>
+        <ul class="features"><li>Core operations + revenue share</li><li>SLA & monthly review</li><li>Priority support</li></ul>
+        <div class="cta-wrap">
+          <button class="cta cta-outline" id="hybridCTA">Choose Hybrid</button>
+          <button class="cta" id="calcHybrid">Calculate</button>
+        </div>
+        <div class="meta-note">Base: <strong>$50/mo</strong> + <strong>8%</strong> commission (default).</div>
       </div>
     </div>
-  </nav>
 
-  <section class="hero hero-small">
-    <div class="hero-slideshow"></div>
-    <div class="hero-overlay" data-aos="fade-down">
-      <h1>Pricing Plans</h1>
+    <div class="calc-panel" aria-labelledby="calcTitle" role="region" style="margin-top:28px;">
+      <h3 id="calcTitle" style="margin:0 0 10px; color:var(--primary);">Compare costs & estimated take-home</h3>
+      <p class="tiny" style="margin:0 0 12px;">Interactive - updates as you type (debounced). Chart and counters animate to show results.</p>
+
+      <div class="calc-grid" role="form" aria-label="Pricing calculator inputs">
+        <div class="calc-row">
+          <label for="inBookings">Bookings / month</label>
+          <input id="inBookings" type="number" inputmode="numeric" min="0" value="50" />
+        </div>
+
+        <div class="calc-row">
+          <label for="inAvg">Avg booking revenue ($)</label>
+          <input id="inAvg" type="number" inputmode="numeric" min="0" value="100" />
+        </div>
+
+        <div class="calc-row">
+          <label for="inNights">Avg nights / booking</label>
+          <input id="inNights" type="number" inputmode="numeric" min="0" value="2" />
+        </div>
+
+        <div class="calc-row">
+          <label for="inOcc">Occupancy (%) : optional</label>
+          <input id="inOcc" type="number" inputmode="numeric" min="0" max="100" value="75" />
+        </div>
+
+        <div class="calc-row">
+          <label for="selectAnnual">Show annual pricing?</label>
+          <select id="selectAnnual" aria-label="Show annual pricing">
+            <option value="monthly" selected>Monthly view</option>
+            <option value="annual">Annual (shows equivalent monthly billed yearly - 15% savings)</option>
+          </select>
+        </div>
+
+        <div class="calc-row">
+          <label for="selectPlan">Choose plan</label>
+          <select id="selectPlan" aria-label="Choose service plan">
+            <option value="100" data-name="Basic">Basic - $100 / month</option>
+            <option value="200" data-name="Growth">Growth - $200 / month</option>
+            <option value="300" data-name="Premium">Premium - $300 / month</option>
+          </select>
+        </div>
+
+        <div class="calc-row" style="align-self:center;">
+          <label style="visibility:hidden;">.</label>
+          <div style="display:flex; gap:8px;">
+            <button class="cta cta-primary" id="calcNow">Calculate</button>
+            <button class="cta cta-outline" id="calcReset">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-results" aria-live="polite">
+        <div class="result-card" id="resGross">Gross revenue: -</div>
+        <div class="result-card" id="resCost">Estimated cost: -</div>
+        <div class="result-card" id="resSelected">Selected plan: -</div>
+        <div class="result-card" id="resNet">Net revenue: -</div>
+      </div>
+
+      <div class="chart-wrap" aria-hidden="false" style="margin-top:12px;">
+        <canvas id="pricingChart" width="720" height="200" aria-label="Pricing comparison chart"></canvas>
+        <div style="flex:1; min-width:220px; text-align:left;">
+          <div id="bestRec" style="font-weight:800; color:var(--primary); margin-bottom:8px;">Recommended: -</div>
+          <div id="recDetails" class="tiny" style="color:var(--muted);">Tip: try changing bookings or avg revenue to see when commission/hybrid becomes cheaper.</div>
+        </div>
+      </div>
     </div>
-  </section>
 
-  <section class="services">
-    <h2 data-aos="fade-up">Flexible Pricing Options</h2>
-    <div class="service-cards">
-      <div class="card" data-aos="fade-up" data-aos-delay="100">
-        <h3>Basic Plan</h3>
-        <ul>
-          <li>Guest communication</li>
-          <li>Booking management</li>
-          <li>Email support</li>
-        </ul>
-        <p><strong>$250/month</strong></p>
-      </div>
-      <div class="card" data-aos="fade-up" data-aos-delay="200">
-        <h3>Standard Plan</h3>
-        <ul>
-          <li>All Basic Plan services</li>
-          <li>Cleaning coordination</li>
-          <li>Financial tracking</li>
-        </ul>
-        <p><strong>$450/month</strong></p>
-      </div>
-      <div class="card" data-aos="fade-up" data-aos-delay="300">
-        <h3>Premium Plan</h3>
-        <ul>
-          <li>All Standard Plan services</li>
-          <li>Maintenance coordination</li>
-          <li>Priority support</li>
-        </ul>
-        <p><strong>$650/month</strong></p>
+    <div class="cta-strip" role="region" aria-label="Choose your plan">
+      <h3>Choose your plan and get started today!</h3>
+      <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+        <button class="strip-cta" id="hireCTA">Hire Your VA Today</button>
+        <button class="cta cta-outline" id="openModalCalc">Open modal calculator</button>
       </div>
     </div>
-  </section>
 
-  <section class="cta" data-aos="zoom-in">
-    <h2>Choose your plan and get started today!</h2>
-    <a href="hire.html" class="btn btn-cta">Hire Your VA Today</a>
-  </section>
+    <div class="pricing-footer">Annual plans = ~15% savings. Cancel anytime with 30 days' notice. For enterprise pricing, request a custom quote.</div>
+  </div>
 
-  <footer>
-    &copy; 2025 SmartStay VA. All Rights Reserved.
-  </footer>
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true" style="display:none; position:fixed; inset:0; background:rgba(6,10,20,0.5); align-items:center; justify-content:center; z-index:80; padding:20px;">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalCalcTitle" style="background:white; border-radius:12px; max-width:720px; width:100%; padding:18px;">
+      <button class="modal-close" id="closeModal" aria-label="Close calculator" style="position:absolute; top:14px; right:18px; background:transparent; border:0; font-size:20px; cursor:pointer;">&times;</button>
+      <h4 id="modalCalcTitle">Quick pricing calculator</h4>
+      <p class="tiny" style="margin:6px 0 12px;">Enter bookings and avg revenue to compare.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <input id="mBookings" type="number" value="50" style="flex:1; padding:10px; border-radius:8px; border:1px solid #eee;" />
+        <input id="mAvg" type="number" value="100" style="flex:1; padding:10px; border-radius:8px; border:1px solid #eee;" />
+        <button class="cta cta-primary" id="mRun">Compare</button>
+      </div>
+      <div id="mResults" style="margin-top:12px; font-weight:700;"></div>
+    </div>
+  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({ duration: 1000, once: true });
-  </script>
+<script>
+(function(){
+  const CONFIG = {
+    FIXED: { Basic:100, Growth:200, Premium:300 },
+    COMMISSION_RATE: 0.12,
+    HYBRID: { base:50, rate:0.08 },
+    ANNUAL_DISCOUNT: 0.15
+  };
+
+  function formatMoney(n){
+    if(isNaN(n)) return '$0';
+    const rounded = Math.round(n*100)/100;
+    if(Math.abs(rounded - Math.round(rounded)) < 0.001) return '$' + Math.round(rounded).toLocaleString();
+    return '$' + rounded.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+  function easeOutQuad(t){ return t*(2-t); }
+  function animateNumberText(el, from, to, ms=600){
+    if(!el) return;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(prefersReduced || from === to){ el.textContent = Math.round(to); return; }
+    const start = performance.now();
+    const diff = to - from;
+    function frame(now){
+      const t = Math.min(1, (now - start)/ms);
+      const val = from + diff * easeOutQuad(t);
+      el.textContent = Math.round(val);
+      if(t < 1) requestAnimationFrame(frame);
+      else el.textContent = Math.round(to);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  const billingToggle = document.getElementById('billingToggle');
+  const selectAnnual = document.getElementById('selectAnnual');
+  const selectPlan = document.getElementById('selectPlan');
+  const inBookings = document.getElementById('inBookings');
+  const inAvg = document.getElementById('inAvg');
+  const inNights = document.getElementById('inNights');
+  const inOcc = document.getElementById('inOcc');
+  const calcNow = document.getElementById('calcNow');
+  const calcReset = document.getElementById('calcReset');
+  const pricingChart = document.getElementById('pricingChart');
+  let ctx = null;
+  if(pricingChart && pricingChart.getContext) ctx = pricingChart.getContext('2d');
+
+  const priceEls = Array.from(document.querySelectorAll('.price'));
+  const resGross = document.getElementById('resGross');
+  const resCost = document.getElementById('resCost');
+  const resSelected = document.getElementById('resSelected');
+  const resNet = document.getElementById('resNet');
+  const bestRec = document.getElementById('bestRec');
+  const openModalCalc = document.getElementById('openModalCalc');
+  const modalBackdrop = document.getElementById('modalBackdrop');
+  const closeModal = document.getElementById('closeModal');
+  const mBookings = document.getElementById('mBookings');
+  const mAvg = document.getElementById('mAvg');
+  const mRun = document.getElementById('mRun');
+  const mResults = document.getElementById('mResults');
+
+  function computeAnnualFromMonthly(monthly){
+    const annual = Math.round(monthly * 12 * (1 - CONFIG.ANNUAL_DISCOUNT));
+    const perMonth = Math.round(annual / 12);
+    return { annual, perMonth };
+  }
+
+  function setCardPriceAnimated(priceEl, isAnnual){
+    const monthly = Number(priceEl.dataset.month) || 0;
+    const amountEl = priceEl.querySelector('.amount.amount-anim');
+    const periodEl = priceEl.querySelector('.period');
+    const annLabel = priceEl.querySelector('.ann-label');
+    if(monthly === 0 || !amountEl) return;
+    if(isAnnual){
+      const { annual, perMonth } = computeAnnualFromMonthly(monthly);
+      const current = Number(amountEl.textContent.replace(/[^0-9.-]+/g,"")) || monthly;
+      animateNumberText(amountEl, current, perMonth, 600);
+      periodEl.textContent = '/mo (billed yearly)';
+      annLabel.textContent = '$' + annual + ' / year - save ' + Math.round(CONFIG.ANNUAL_DISCOUNT*100) + '%';
+    } else {
+      const current = Number(amountEl.textContent.replace(/[^0-9.-]+/g,"")) || monthly;
+      animateNumberText(amountEl, current, monthly, 600);
+      periodEl.textContent = '/mo';
+      annLabel.textContent = '';
+    }
+  }
+  function updateAllCardPrices(isAnnual){ priceEls.forEach(pe => setCardPriceAnimated(pe, isAnnual)); }
+
+  // Chart helpers
+  let animId = null;
+  function resizeCanvas(){
+    if(!pricingChart) return;
+    const wrap = pricingChart.parentElement || document.body;
+    const w = Math.min(720, Math.max(300, wrap.offsetWidth - 12));
+    pricingChart.width = w;
+    pricingChart.height = 200;
+    if(!ctx && pricingChart.getContext) ctx = pricingChart.getContext('2d');
+  }
+  window.addEventListener('resize', () => { resizeCanvas(); safeRenderChartLast(); });
+  resizeCanvas();
+
+  let lastChart = { labels: [], values: [], highlight: 0 };
+  function drawAnimatedBars(labels, values, highlightIndex=0){
+    lastChart.labels = labels.slice();
+    lastChart.values = values.slice();
+    lastChart.highlight = highlightIndex;
+    if(!ctx || !pricingChart) return;
+    if(animId) cancelAnimationFrame(animId);
+    const pad = 16;
+    const w = pricingChart.width - pad*2;
+    const h = pricingChart.height - pad*2;
+    const barH = Math.min(32, Math.floor(h / Math.max(1, labels.length)) - 8);
+    const max = Math.max(...values, 1);
+    const start = performance.now();
+    const duration = 700;
+    function frame(now){
+      const t = Math.min(1, (now - start) / duration);
+      const e = easeOutQuad(t);
+      ctx.clearRect(0,0,pricingChart.width, pricingChart.height);
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0,0,pricingChart.width, pricingChart.height);
+      labels.forEach((lab, i) => {
+        const x = pad;
+        const y = pad + i*(barH + 12);
+        const val = values[i] || 0;
+        const barW = Math.max(2, (val / max) * (w*0.85) * e);
+        ctx.fillStyle = '#eef2ff';
+        ctx.fillRect(x, y, w, barH);
+        ctx.fillStyle = (i === highlightIndex) ? '#0b5ed7' : '#7c93d6';
+        ctx.fillRect(x, y, barW, barH);
+        ctx.fillStyle = '#0f172a'; ctx.font = '13px system-ui, Roboto, Arial';
+        ctx.fillText(lab, x + w + 8, y + Math.round(barH / 1.6));
+        ctx.fillStyle = '#0b3ea8';
+        const showVal = Math.round(val * e);
+        ctx.fillText(formatMoney(showVal), x + Math.min(barW + 8, w - 40), y + Math.round(barH / 1.6));
+      });
+      if(t < 1) animId = requestAnimationFrame(frame);
+    }
+    animId = requestAnimationFrame(frame);
+  }
+  function safeRenderChartLast(){ if(lastChart && lastChart.labels && lastChart.labels.length) drawAnimatedBars(lastChart.labels, lastChart.values, lastChart.highlight); }
+
+  function computeCosts(isAnnualPref){
+    const bookings = Number(inBookings.value) || 0;
+    const avg = Number(inAvg.value) || 0;
+    const gross = bookings * avg;
+    function applyAnnual(monthly){
+      if(isAnnualPref && monthly>0){
+        const annual = Math.round(monthly * 12 * (1 - CONFIG.ANNUAL_DISCOUNT));
+        return (annual / 12);
+      }
+      return monthly;
+    }
+    const selectedPlanMonthly = selectPlan ? Number(selectPlan.value) : CONFIG.FIXED.Basic;
+    const selectedPlanName = selectPlan ? (selectPlan.options[selectPlan.selectedIndex].dataset.name || 'Selected') : 'Selected';
+    const basicCost = applyAnnual(CONFIG.FIXED.Basic);
+    const growthCost = applyAnnual(CONFIG.FIXED.Growth);
+    const premiumCost = applyAnnual(CONFIG.FIXED.Premium);
+    const commissionCost = gross * CONFIG.COMMISSION_RATE;
+    const hybridCost = applyAnnual(CONFIG.HYBRID.base) + (gross * CONFIG.HYBRID.rate);
+    const selectedPlanCost = applyAnnual(selectedPlanMonthly);
+
+    const options = [
+      { name: 'Basic', cost: Math.round(basicCost*100)/100 },
+      { name: 'Growth', cost: Math.round(growthCost*100)/100 },
+      { name: 'Premium', cost: Math.round(premiumCost*100)/100 },
+      { name: 'Commission (' + Math.round(CONFIG.COMMISSION_RATE*100) + '%)', cost: Math.round(commissionCost*100)/100 },
+      { name: 'Hybrid ($' + CONFIG.HYBRID.base + '/mo + ' + Math.round(CONFIG.HYBRID.rate*100) + '%)', cost: Math.round(hybridCost*100)/100 },
+      { name: selectedPlanName + ' (Selected)', cost: Math.round(selectedPlanCost*100)/100, selected: true }
+    ];
+    options.forEach(o => o.net = Math.round((gross - o.cost) * 100) / 100);
+    return { gross, options, selectedPlan: { name: selectedPlanName, cost: Math.round(selectedPlanCost*100)/100 } };
+  }
+
+  function renderResults(isAnnualPref){
+    const { gross, options, selectedPlan } = computeCosts(isAnnualPref);
+    document.querySelectorAll('.result-card').forEach(rc => rc.classList.add('visible'));
+    const prevGross = Number(resGross.dataset.prev || 0);
+    animateNumberText(resGross, prevGross, gross, 700);
+    resGross.dataset.prev = gross;
+    const sortedByNet = options.slice().sort((a,b) => b.net - a.net);
+    const best = sortedByNet[0];
+    const second = sortedByNet[1];
+    const prevCost = Number(resCost.dataset.prev || 0);
+    const targetCost = best ? best.cost : 0;
+    resCost.textContent = 'Estimated cost: ';
+    const costSpan = document.createElement('span'); costSpan.style.fontWeight='900';
+    resCost.appendChild(costSpan);
+    animateNumberText(costSpan, prevCost, targetCost, 700);
+    resCost.dataset.prev = targetCost;
+    if(resSelected){
+      const selectedNet = Math.round((gross - selectedPlan.cost) * 100) / 100;
+      resSelected.innerHTML = selectedPlan.name + ': <strong>' + formatMoney(selectedPlan.cost) + '</strong><br/>Net if chosen: <span class="' + (selectedNet>=0 ? 'net-positive' : 'net-negative') + '">' + formatMoney(selectedNet) + '</span>';
+    }
+    resNet.textContent = 'Net revenue (recommended): ';
+    const netSpan = document.createElement('span'); netSpan.style.fontWeight='900';
+    netSpan.className = best && best.net >=0 ? 'net-positive' : 'net-negative';
+    resNet.appendChild(netSpan);
+    const prevNet = Number(resNet.dataset.prev || 0);
+    const targetNet = best ? best.net : 0;
+    let start = performance.now(); const dur = 700;
+    function step(now){
+      const t = Math.min(1, (now - start)/dur);
+      const val = prevNet + (targetNet - prevNet) * easeOutQuad(t);
+      netSpan.textContent = formatMoney(val);
+      if(t < 1) requestAnimationFrame(step);
+      else resNet.dataset.prev = targetNet;
+    }
+    requestAnimationFrame(step);
+    if(best && second){
+      const diffPct = Math.round(((best.net - second.net)/Math.max(1, Math.abs(second.net))) * 100);
+      bestRec.textContent = 'Recommended: ' + best.name + ' - est. net ' + formatMoney(best.net) + ' / mo (' + Math.abs(diffPct) + '% better than ' + second.name + ').';
+    } else { bestRec.textContent = 'Recommended: -'; }
+    const labels = options.map(o => o.name);
+    const values = options.map(o => o.cost);
+    let lowestIdx = 0;
+    for(let i=1;i<values.length;i++){ if(values[i] < values[lowestIdx]) lowestIdx = i; }
+    lastChart.labels = labels.slice(); lastChart.values = values.slice(); lastChart.highlight = lowestIdx;
+    resizeCanvas(); drawAnimatedBars(labels, values, lowestIdx);
+    if(pricingChart) pricingChart.setAttribute('aria-label', 'Pricing chart: ' + labels.map((l,i) => l + ' ' + formatMoney(values[i])).join(', '));
+  }
+
+  function applyBillingToggle(isAnnual){
+    if(selectAnnual) selectAnnual.value = isAnnual ? 'annual' : 'monthly';
+    updateAllCardPrices(isAnnual);
+    renderResults(isAnnual);
+  }
+
+  function updateAllCardPrices(isAnnual){ priceEls.forEach(pe => setCardPriceAnimated(pe, isAnnual)); }
+  function debounce(fn, ms=300){ let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); }; }
+
+  billingToggle && billingToggle.addEventListener('click', function(){
+    const pressed = this.getAttribute('aria-pressed') === 'true';
+    const next = !pressed;
+    this.setAttribute('aria-pressed', String(next));
+    applyBillingToggle(next);
+  });
+
+  if(selectAnnual){
+    selectAnnual.addEventListener('change', function(){
+      const isAnnual = this.value === 'annual';
+      billingToggle.setAttribute('aria-pressed', String(isAnnual));
+      applyBillingToggle(isAnnual);
+    });
+  }
+
+  // Choose buttons - now redirect to payment.html including billing and current inputs
+  document.querySelectorAll('.cta[data-plan]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const planName = btn.getAttribute('data-plan') || '';
+      if(!planName) return;
+      const billing = (selectAnnual && selectAnnual.value === 'annual') ? 'annual' : 'monthly';
+      const bookings = encodeURIComponent(inBookings?.value || '');
+      const avg = encodeURIComponent(inAvg?.value || '');
+      const url = 'payment.html?plan=' + encodeURIComponent(planName) + '&billing=' + billing + '&bookings=' + bookings + '&avg=' + avg;
+      // add small visual highlight before redirect
+      const card = btn.closest('.card');
+      if(card){
+        card.classList.add('selected-plan');
+        setTimeout(() => { window.location.href = url; }, 160); // short polish then redirect
+      } else {
+        window.location.href = url;
+      }
+    });
+  });
+
+  // Commission & Hybrid choose redirect
+  document.getElementById('commissionCTA')?.addEventListener('click', ()=> {
+    const billing = (selectAnnual && selectAnnual.value === 'annual') ? 'annual' : 'monthly';
+    const url = 'payment.html?plan=Commission&billing=' + billing + '&bookings=' + encodeURIComponent(inBookings?.value || '') + '&avg=' + encodeURIComponent(inAvg?.value || '');
+    window.location.href = url;
+  });
+  document.getElementById('hybridCTA')?.addEventListener('click', ()=> {
+    const billing = (selectAnnual && selectAnnual.value === 'annual') ? 'annual' : 'monthly';
+    const url = 'payment.html?plan=Hybrid&billing=' + billing + '&bookings=' + encodeURIComponent(inBookings?.value || '') + '&avg=' + encodeURIComponent(inAvg?.value || '');
+    window.location.href = url;
+  });
+
+  // Compare buttons set example inputs and show calculator
+  const compareMap = {
+    calcBasic: { bookings:50, avg:100 },
+    calcGrowth: { bookings:75, avg:120 },
+    calcPremium: { bookings:120, avg:150 },
+    calcCommission: { bookings:20, avg:80 },
+    calcHybrid: { bookings:40, avg:110 }
+  };
+  Object.keys(compareMap).forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('click', () => {
+      const sample = compareMap[id];
+      if(inBookings) inBookings.value = sample.bookings;
+      if(inAvg) inAvg.value = sample.avg;
+      if(id === 'calcBasic' && selectPlan) selectPlan.value = '100';
+      if(id === 'calcGrowth' && selectPlan) selectPlan.value = '200';
+      if(id === 'calcPremium' && selectPlan) selectPlan.value = '300';
+      renderResults(selectAnnual && selectAnnual.value === 'annual');
+      const calcPanel = document.querySelector('.calc-panel');
+      if(calcPanel) calcPanel.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  });
+
+  [inBookings, inAvg, inNights, inOcc].forEach(el => el?.addEventListener('input', debounce(()=> renderResults(selectAnnual && selectAnnual.value === 'annual'), 320)));
+  selectPlan && selectPlan.addEventListener('change', debounce(()=> renderResults(selectAnnual && selectAnnual.value === 'annual'), 320));
+  calcNow && calcNow.addEventListener('click', ()=> renderResults(selectAnnual && selectAnnual.value === 'annual'));
+  calcReset && calcReset.addEventListener('click', ()=> {
+    inBookings.value = 0; inAvg.value = 0; inNights.value = 0; inOcc.value = 0;
+    if(selectAnnual) selectAnnual.value = 'monthly';
+    if(selectPlan) selectPlan.value = '100';
+    billingToggle && billingToggle.setAttribute('aria-pressed','false');
+    updateAllCardPrices(false);
+    renderResults(false);
+  });
+
+  openModalCalc && openModalCalc.addEventListener('click', ()=>{ modalBackdrop.style.display='flex'; modalBackdrop.setAttribute('aria-hidden','false'); mBookings.focus(); });
+  closeModal && closeModal.addEventListener('click', ()=>{ modalBackdrop.style.display='none'; modalBackdrop.setAttribute('aria-hidden','true'); });
+  modalBackdrop && modalBackdrop.addEventListener('click', (e)=>{ if(e.target === modalBackdrop){ modalBackdrop.style.display='none'; modalBackdrop.setAttribute('aria-hidden','true'); } });
+  mRun && mRun.addEventListener('click', ()=> {
+    const b = Number(mBookings.value)||0; const a = Number(mAvg.value)||0; const gross = b*a;
+    const comm = gross * CONFIG.COMMISSION_RATE;
+    mResults.textContent = 'Gross ' + formatMoney(gross) + ' - Commission (' + Math.round(CONFIG.COMMISSION_RATE*100) + '%): ' + formatMoney(comm) + '.';
+  });
+
+  document.getElementById('hireCTA')?.addEventListener('click', function() { window.location.href = 'hire.html'; });
+  document.addEventListener('keydown', (e)=> { if(e.key === 'Escape' && modalBackdrop.style.display === 'flex'){ modalBackdrop.style.display='none'; modalBackdrop.setAttribute('aria-hidden','true'); } });
+
+  // initialize
+  priceEls.forEach(pe => {
+    const monthly = Number(pe.dataset.month) || 0;
+    const amountEl = pe.querySelector('.amount.amount-anim');
+    if(amountEl) amountEl.textContent = monthly;
+  });
+  if(selectPlan) selectPlan.value = '100';
+  renderResults(false);
+
+})();
+</script>
+</section>
 </body>
 </html>
