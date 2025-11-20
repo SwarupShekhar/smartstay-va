@@ -200,6 +200,10 @@ a {
   width: 280px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.1);
   transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* make each card fill the available vertical space */
 }
 
 .service-cards .card:hover {
@@ -367,7 +371,7 @@ footer {
   border-radius: 15px;
   backface-visibility: hidden;
   background: #ffffff;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -378,7 +382,7 @@ footer {
 
 .flip-front img {
   width: 165px;
-  height: 1650px;
+  height: auto;
   margin-bottom: 1rem;
 }
 
@@ -455,6 +459,7 @@ footer {
   color: #fff;
   max-width: 1200px;
   margin: 0 auto;
+  align-items: start;
 }
 
 .service-card {
@@ -467,6 +472,10 @@ footer {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeUp 0.8s forwards;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .service-card img {
@@ -496,50 +505,138 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive behavior */
-@media (max-width: 768px) {
-  .service-cards {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .nav-container {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .hero-overlay h1 {
-    font-size: 2.2rem;
-  }
+/* ===== PAGE SECTION & CARD LAYOUTS (for about.html and similar pages) ===== */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 20px;
+  box-sizing: border-box;
 }
 
-@media (max-width: 480px) {
-  .hero-overlay h1 {
-    font-size: 1.8rem;
-  }
-
-  .hero-overlay p {
-    font-size: 1rem;
-  }
-
-  .service-cards .card {
-    width: 90%;
-    padding: 1.5rem;
-  }
-
-  #propertyForm {
-    padding: 1.5rem;
-  }
+.section-heading {
+  font-size: 1.75rem;
+  color: #0f2d6b;
+  margin-bottom: 8px;
+  font-weight: 800;
 }
 
-@media (max-width: 1024px) {
-  .services-container { grid-template-columns: repeat(2,1fr); padding: 180px 40px 80px; }
+.section-sub {
+  color: #56647a;
+  margin-bottom: 20px;
 }
 
-@media (max-width: 768px) {
-  .services-container { grid-template-columns: 1fr; padding: 160px 20px 60px; }
-  .slideshow { display: none; } /* hide full-screen slideshow on small screens for readability */
+/* two-column card grid for mission + core values */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 28px;
+  column-gap: 64px !important; /* stronger horizontal gap; force with !important */
+  align-items: stretch;
+  padding-left: 12px;
+  padding-right: 12px;
 }
+
+/* generic card used across about.html */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 10px 28px rgba(11,78,215,0.06);
+  display: flex;           /* make card a flex column */
+  flex-direction: column;
+  justify-content: space-between;
+  color: #0f172a;
+  height: 100%;            /* fill the grid cell height */
+  border: 1px solid rgba(11,78,215,0.10); /* slightly stronger stroke */
+  box-shadow: 0 6px 16px rgba(11,78,215,0.05); /* lighter shadow so gaps appear cleaner */
+}
+
+/* pill info */
+.pill {
+  display: inline-block;
+  background: linear-gradient(90deg,#fff7e6,#fff2d0);
+  color: #0b3ea8;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+/* values list */
+.values-list {
+  margin: 12px 0 0;
+  padding-left: 1rem;
+  color: #475569;
+}
+.values-list li { margin: 8px 0; }
+
+/* team grid */
+.team-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0,1fr));
+	row-gap: 32px;
+	column-gap: 64px !important; /* explicit horizontal gap */
+	margin-top: 30px;
+	align-items: stretch;
+	/* keep content centered inside the section */
+	padding-left: 12px;
+	padding-right: 12px;
+}
+
+/* timeline */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 18px;
+}
+.timeline-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.timeline-item .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(90deg,#0b5ed7,#073ea8);
+  margin-top: 6px;
+  flex: 0 0 12px;
+}
+.timeline-item > div { background: #fff; padding: 12px 14px; border-radius: 10px; box-shadow: 0 8px 20px rgba(11,78,215,0.04); }
+
+/* stats inside card */
+.stats { display:flex; gap:12px; margin-top:12px; flex-wrap:wrap; }
+.stat { background: #f8fbff; padding:12px 14px; border-radius:10px; min-width:120px; text-align:center; box-shadow:0 8px 18px rgba(11,78,215,0.03); }
+.num { font-weight:900; color:#0b3ea8; font-size:1.6rem; }
+.label { color:#56647a; font-size:.9rem; }
+
+/* CTA strip inside section */
+.cta-strip {
+  display:flex;
+  gap:16px;
+  align-items:center;
+  justify-content:space-between;
+  background:linear-gradient(90deg,#0b5ed7,#0756d9);
+  color:#fff;
+  padding:20px;
+  border-radius:12px;
+  margin-top:18px;
+}
+.cta-strip .btn-cta { background:#ffce00; color:#07204b; padding:10px 16px; border-radius:8px; font-weight:800; text-decoration:none; }
+
+/* small helper */
+.muted { color:#6b7280; }
+
+/* responsive */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; column-gap: 20px !important; row-gap: 20px; padding-left: 8px; padding-right: 8px; }
+  .team-grid { grid-template-columns: 1fr; column-gap: 18px !important; row-gap: 18px; padding-left: 8px; padding-right: 8px; }
+  .service-cards .card,
+  .service-card,
+  .team-grid .card { height: auto; } /* allow natural height on small screens */
+}
+
 /* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
   from {
@@ -934,7 +1031,6 @@ footer {
     0 0 8px rgba(255, 234, 2, 0.8),
     0 0 28px rgba(246, 255, 0, 0.8),
     0 0 60px rgba(0, 74, 173, 1);
-  transform: translateY(-2px);
 }
 @media (max-width: 768px) {
   .smartstay-benefit-section {
@@ -1278,7 +1374,7 @@ footer {
 .services {
   padding: 4rem 2rem;
   text-align: center;
-  background: linear-gradient(135deg, #ffffff, hwb(210 83% 3%));
+  background: linear-gradient(135deg, #f0f8ff, #e6f2ff);
 }
 /* ===== FAQ Section ===== */
 .faq-section {
@@ -1355,37 +1451,15 @@ footer {
   transform: rotate(45deg);
 }
 /* ===== FAQ CTA Block ===== */
-.faq-cta {
-  text-align: center;
-  margin-top: 60px;
-  padding: 50px 24px 70px;
-  background: linear-gradient(135deg, #eef3ff 0%, #f9fbff 100%);
-  border-radius: 16px;
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
-}
-
-.faq-cta h3 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #0F2D6B;
-  margin-bottom: 12px;
-}
-
-.faq-cta p {
-  font-size: 1rem;
-  color: #4B5873;
-  max-width: 680px;
-  margin: 0 auto 30px;
-  line-height: 1.6;
-}
-
-/* CTA Button Consistency */
+/* ensure .faq-cta-btn / .btn-glow region is closed correctly and .btn-cta lives at top-level */
 .faq-cta-btn {
   margin-top: 8px;
 }
 .faq-cta-btn .btn-glow {
   padding: 14px 26px;
   font-size: 15px;
+}
+
 /* ===== BUTTON STYLES ===== */
 .btn-cta {
   display: inline-block;
@@ -1398,4 +1472,99 @@ footer {
   cursor: pointer;
   transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
   text-decoration: none;
-}} 
+}
+
+/* Remove the accidental duplicated services override and keep the theme-consistent rule */
+.services {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #f0f8ff, #e6f2ff);
+}
+
+/* tidy hero-small overrides near EOF (kept, but ensure no stray tokens after closing brace) */
+.hero-small {
+  height: 320px !important;
+  min-height: 280px !important;
+  overflow: hidden !important;
+}
+
+/* Ensure the grid cells stretch to equal height */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 28px;
+  column-gap: 64px !important; /* stronger horizontal gap; force with !important */
+  align-items: stretch;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+/* Team grid (about page) — ensure a clear horizontal gap and contrast */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  row-gap: 32px;
+  column-gap: 64px !important; /* explicit horizontal gap */
+  margin-top: 30px;
+  align-items: stretch;
+  padding-left: 12px;
+  padding-right: 12px;
+  background: transparent; /* keep neutral, but change if you want visible strip */
+}
+
+/* make card separation more visible */
+.team-grid .card,
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(11,78,215,0.10); /* slightly stronger stroke */
+  box-shadow: 0 6px 16px rgba(11,78,215,0.05); /* lighter shadow so gaps appear cleaner */
+  height: 100%;
+}
+
+/* On very narrow screens use smaller gaps (keeps responsive behavior) */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; column-gap: 20px !important; row-gap: 20px; padding-left: 8px; padding-right: 8px; }
+  .team-grid { grid-template-columns: 1fr; column-gap: 18px !important; row-gap: 18px; padding-left: 8px; padding-right: 8px; }
+}
+
+/* ...existing code... */
+/* Floating 3D house in bottom-right corner */
+/* ===== Floating 3D House Widget ===== */
+#floating-house {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  width: 200px;
+  height: 200px;
+  z-index: 9999; /* High z-index to ensure it sits on top */
+  pointer-events: auto; /* Allows you to spin it with mouse */
+  transition: transform 0.3s ease;
+}
+
+#floating-house canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  outline: none;
+}
+
+#floating-house:hover {
+  transform: scale(1.1);
+  cursor: grab;
+}
+
+#floating-house:active {
+  cursor: grabbing;
+}
+
+/* Mobile Adjustment */
+@media (max-width: 768px) {
+  #floating-house {
+    width: 120px;
+    height: 120px;
+    bottom: 10px;
+    right: 10px;
+  }
+}

@@ -1,66 +1,323 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmartStay VA | About</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SmartStay VA — About</title>
+
   <link rel="stylesheet" href="style.css">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    /* small page-specific tweaks (kept local so global style.css remains primary) */
+
+    /* ensure hero-small stays compact and consistent */
+    .hero-small {
+      height: 320px;            /* compact but visually present */
+      min-height: 280px;
+      overflow: hidden;
+    }
+    .hero-small .hero-overlay {
+      padding: 0 1.5rem;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      z-index: 3;
+      background: rgba(0,0,0,0.35); /* subtle overlay so text is readable */
+    }
+    .about-hero-inner { max-width: 880px; margin: 0 auto; color: #fff; }
+    .about-hero-inner h1 { font-size: 32px; margin: 0 0 8px; color: #fff; font-weight:800; }
+    .about-hero-inner p { margin: 0; color: #f1f5f9; font-size:16px; line-height:1.5; }
+
+    /* hero-slideshow is controlled by JS - ensure it fills hero */
+    .hero-slideshow {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: opacity 900ms ease-in-out, background-image 400ms ease-in-out;
+      opacity: 1;
+    }
+
+    /* small responsive tweaks so hero text stays readable */
+    @media (max-width: 720px) {
+      .hero-small { height: 260px; }
+      .about-hero-inner h1 { font-size: 22px; }
+      .about-hero-inner p { font-size: 14px; }
+    }
+  </style>
 </head>
+
 <body>
-  <nav class="nav">
+
+  <!-- NAV -->
+  <nav class="nav" role="navigation" aria-label="Main">
     <div class="nav-container">
       <div class="logo"><a href="index.html">SmartStay VA</a></div>
+
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="services.html">Services</a>
         <a href="pricing.html">Pricing</a>
-        <a href="about.html">About</a>
+        <a href="about.html" aria-current="page">About</a>
         <a href="hire.html">Hire</a>
       </div>
     </div>
   </nav>
 
-  <section class="hero hero-small">
-    <div class="hero-slideshow"></div>
+  <!-- HERO (compact) -->
+  <section class="hero hero-small" aria-label="About hero">
+    <div class="hero-slideshow" id="heroSlideshow" aria-hidden="true"></div>
+
     <div class="hero-overlay" data-aos="fade-down">
-      <h1>About SmartStay VA</h1>
-    </div>
-  </section>
-
-  <section class="services">
-    <h2 data-aos="fade-up">Our Mission</h2>
-    <p data-aos="fade-up" data-aos-delay="100">
-      At SmartStay VA, we aim to simplify the lives of short-term rental owners by providing dedicated virtual assistants who handle the daily operations efficiently and professionally.
-    </p>
-
-    <h2 data-aos="fade-up" data-aos-delay="200">Our Team</h2>
-    <div class="service-cards">
-      <div class="card" data-aos="fade-up" data-aos-delay="300">
-        <img src="https://img.icons8.com/color/96/000000/manager.png" alt="Team Lead">
-        <h3>Team Lead</h3>
-        <p>Experienced in hospitality and operations management, leading our VA team.</p>
-      </div>
-      <div class="card" data-aos="fade-up" data-aos-delay="400">
-        <img src="https://img.icons8.com/color/96/000000/virtual-reality.png" alt="VAs">
-        <h3>Virtual Assistants</h3>
-        <p>Professional VAs trained to handle guest communication, bookings, and maintenance coordination.</p>
+      <div class="about-hero-inner">
+        <h1>About SmartStay VA</h1>
+        <p>
+          We simplify short-term rental operations by managing guest communication,
+          bookings, cleaning coordination, and maintenance tasks so owners can grow
+          their portfolios with less day to day work and more confidence.
+        </p>
       </div>
     </div>
   </section>
 
-  <section class="cta" data-aos="zoom-in">
-    <h2>Want to learn more?</h2>
-    <a href="hire.html" class="btn btn-cta">Hire Your VA Today</a>
-  </section>
+  <main>
+    <!-- MISSION -->
+    <section class="section" aria-labelledby="mission" data-aos="fade-up">
+      <div class="grid">
+        <div class="card">
+          <h3 id="mission">Our mission</h3>
+          <p class="muted">To make short-term rental ownership predictable and profitable by delivering reliable operations support staffed by trained specialists. We focus on quick guest response, consistent operations, and measurable results so owners can grow with confidence.</p>
+
+          <div class="stats">
+            <div class="stat" data-aos="fade-up" data-aos-delay="60">
+              <div class="num">1,200+</div>
+              <div class="label">Bookings managed this year</div>
+            </div>
+            <div class="stat" data-aos="fade-up" data-aos-delay="120">
+              <div class="num">24/7</div>
+              <div class="label">Guest support coverage</div>
+            </div>
+            <div class="stat" data-aos="fade-up" data-aos-delay="180">
+              <div class="num">6</div>
+              <div class="label">Languages supported</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Core values</h3>
+          <ul class="values-list">
+            <li><strong>Reliability</strong> - consistent operations and clear service levels.</li>
+            <li><strong>Responsiveness</strong> - fast answers for guests and owners.</li>
+            <li><strong>Transparency</strong> - clear reporting and performance metrics.</li>
+            <li><strong>Improvement</strong> - ongoing testing to increase revenue and occupancy.</li>
+          </ul>
+
+          <div class="pill">Average response time - under 30 minutes</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM COMPOSITION -->
+    <section class="section" aria-labelledby="team" data-aos="fade-up">
+      <h2 id="team" class="section-heading">Our team and expertise</h2>
+      <p class="section-sub">We are a multidisciplinary operations team built for hosts. Below is what the team is composed of and the expert services we provide.</p>
+
+      <div class="team-grid" role="list" aria-label="Team composition and services">
+        <!-- Virtual Assistants -->
+        <div class="card" role="listitem" data-aos="fade-up" data-aos-delay="80">
+          <h3>Virtual Assistants</h3>
+          <p class="muted">
+            Our VAs are trained in guest communication, booking confirmation,
+            check-in coordination, and day-to-day guest interactions. Every assistant
+            follows standardized SOPs to ensure consistent service across all listings.
+          </p>
+
+          <div class="team-meta">
+            <div>
+              <strong>Primary tasks</strong>
+              <div class="muted">Messaging, reservation handling, guest screening</div>
+            </div>
+            <div>
+              <strong>Model</strong>
+              <div class="muted">24/7 coverage with multilingual support</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Revenue & Listing Specialists -->
+        <div class="card" role="listitem" data-aos="fade-up" data-aos-delay="140">
+          <h3>Revenue and Listing Specialists</h3>
+          <p class="muted">
+            This team manages dynamic pricing, updates rules across booking platforms,
+            and optimizes listing visibility. Their work drives measurable improvements
+            in occupancy and net revenue.
+          </p>
+
+          <div class="team-meta">
+            <div>
+              <strong>Primary tasks</strong>
+              <div class="muted">Pricing tests, channel updates, A/B experiments</div>
+            </div>
+            <div>
+              <strong>Impact</strong>
+              <div class="muted">Average 5 to 12 percent revenue uplift</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cleaning & Maintenance Coordinators -->
+        <div class="card" role="listitem" data-aos="fade-up" data-aos-delay="200">
+          <h3>Cleaning and Maintenance Coordinators</h3>
+          <p class="muted">
+            Coordinators handle vendor communication, same-day maintenance requests,
+            cleaning schedules, and guest-ready compliance. They ensure properties meet
+            service levels at all times.
+          </p>
+
+          <div class="team-meta">
+            <div>
+              <strong>Primary tasks</strong>
+              <div class="muted">Cleaner scheduling, vendor escalation, inspections</div>
+            </div>
+            <div>
+              <strong>Vendor SLA</strong>
+              <div class="muted">Average response under 2 hours</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quality Assurance & Analytics -->
+        <div class="card" role="listitem" data-aos="fade-up" data-aos-delay="260">
+          <h3>Quality Assurance and Analytics</h3>
+          <p class="muted">
+            A QA team reviews communication quality and operational performance.
+            Analytics specialists produce monthly owner reports with data-driven
+            recommendations for improvement.
+          </p>
+
+          <div class="team-meta">
+            <div>
+              <strong>Primary tasks</strong>
+              <div class="muted">Quality reviews, owner reporting, KPI monitoring</div>
+            </div>
+            <div>
+              <strong>Reporting</strong>
+              <div class="muted">Monthly performance summaries</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW WE WORK -->
+    <section class="section" aria-labelledby="how" data-aos="fade-up">
+      <h2 id="how" class="section-heading">How we work</h2>
+      <p class="muted">Simple onboarding and continuous improvement. We focus on operational levers that improve guest experience and owner returns.</p>
+
+      <div class="timeline">
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="80">
+          <div class="dot" aria-hidden="true"></div>
+          <div>
+            <strong>Onboard in 7 to 10 days</strong>
+            <div class="muted">Property audit, channel access setup, SOP alignment, and a test-run week with real guest messages monitored.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="140">
+          <div class="dot" aria-hidden="true"></div>
+          <div>
+            <strong>Live operations and weekly check-ins</strong>
+            <div class="muted">Daily guest handling, cleaning and maintenance coordination, and weekly calls to review any open issues.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="dot" aria-hidden="true"></div>
+          <div>
+            <strong>Monthly reporting and improvements</strong>
+            <div class="muted">Revenue, occupancy, response times, and suggested operational or pricing experiments for the upcoming month.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" data-aos="zoom-in">
+      <div class="cta-strip">
+        <div>
+          <h3 class="cta-title">Ready to reduce your operations workload?</h3>
+          <div class="muted">Book a quick call and get a plan designed for your property.</div>
+        </div>
+        <a class="btn-cta" href="hire.html">Hire Your VA Today</a>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    &copy; 2025 SmartStay VA. All Rights Reserved.
+    &copy; 2025 SmartStay VA. All rights reserved.
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <!-- small slideshow script - rotates a list of images; no external libraries needed -->
   <script>
-    AOS.init({ duration: 1000, once: true });
+    (function(){
+      const imgList = [
+        'https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Lucid_Origin_a_cinematic_photo_of_ultrarealistic_and_in_high_d_3.jpg',
+        'https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/room-1.jpg',
+        'https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/room-2.jpg'
+      ];
+
+      const el = document.getElementById('heroSlideshow');
+      let current = 0;
+      let timer = null;
+      const INTERVAL = 5000; // 5 seconds
+
+      function setBg(idx){
+        if(!el) return;
+        const url = imgList[idx % imgList.length];
+        el.style.opacity = 0;
+        setTimeout(()=> {
+          el.style.backgroundImage = 'url(' + url + ')';
+          el.style.opacity = 1;
+        }, 350);
+      }
+
+      function start(){
+        if(timer) clearInterval(timer);
+        timer = setInterval(()=> {
+          current = (current + 1) % imgList.length;
+          setBg(current);
+        }, INTERVAL);
+      }
+
+      function stop(){
+        if(timer) clearInterval(timer);
+        timer = null;
+      }
+
+      // initial
+      if(el) {
+        setBg(current);
+        start();
+
+        // pause on hover/focus for better UX (no visible buttons required)
+        const heroSection = el.closest('.hero') || el.parentElement;
+        if(heroSection){
+          heroSection.addEventListener('mouseenter', stop);
+          heroSection.addEventListener('mouseleave', start);
+          heroSection.addEventListener('focusin', stop);
+          heroSection.addEventListener('focusout', start);
+        }
+      }
+    })();
   </script>
+
+  <!-- keep site behaviors -->
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script> AOS.init({ duration: 700, once: true }); </script>
 </body>
 </html>

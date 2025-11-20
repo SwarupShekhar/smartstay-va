@@ -33,7 +33,6 @@
       </div>
     </div>
   </section>
-  <script src="script.js"></script>
 
   <!-- SERVICES PREVIEW -->
   <!-- ===== SERVICES / FLIP CARDS ===== -->
@@ -544,8 +543,7 @@ The everyday struggles nearly every short-term rental host faces.
 </section>
   <!-- END OF FAQ SECTION -->
 
-
-  <!-- CTA -->
+    <!-- CTA -->
   <section class="cta" data-aos="zoom-in">
     <h2>Ready to get started?</h2>
     <a href="hire.html" class="btn btn-cta">Hire Your VA Today</a>
@@ -561,14 +559,16 @@ The everyday struggles nearly every short-term rental host faces.
   <script>
     AOS.init({ duration: 1000, once: true });
   </script>
-</body>
-</html>
-    &copy;
-  </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({ duration: 1000, once: true });
-  </script>
+  <!-- Floating 3D house (bottom right) -->
+  <div id="floating-house" class="floating-house" aria-hidden="true"></div>
+
+  <!-- 3D libraries (ONE consistent version) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+  <!-- Site JS (must be last) -->
+  <script src="script.js"></script>
 </body>
 </html>
