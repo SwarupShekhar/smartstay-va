@@ -242,13 +242,20 @@ document.querySelectorAll('.faq-question').forEach(question => {
   container.appendChild(renderer.domElement);
 
   // Lights
-  const ambient = new THREE.AmbientLight(0xffffff, 1);
-  scene.add(ambient);
+// Lights for a brighter "daytime" look
 
-  const dir = new THREE.DirectionalLight(0xffffff, 0.9);
-  dir.position.set(2, 3, 4);
-  scene.add(dir);
+// Sky and ground light
+const hemi = new THREE.HemisphereLight(0xf5f7ff, 0xd0d8e8, 0.9);
+scene.add(hemi);
 
+// Soft ambient to fill shadows without washing out
+const ambient = new THREE.AmbientLight(0xffffff, 0.35);
+scene.add(ambient);
+
+// Main sun light: slightly warm and stronger so the gold roof shines
+const dir = new THREE.DirectionalLight(0xfff1c4, 2.0);
+dir.position.set(2.5, 5, 3); // from above and in front
+scene.add(dir);
   // Controls (small orbit for fun)
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
