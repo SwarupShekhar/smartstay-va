@@ -357,3 +357,41 @@ scene.add(dir);
   }
   animate();
 })();
+<script>
+(function() {
+  // Selectors — adjust if your hero uses a different class
+  const nav = document.querySelector('.nav');
+  const hero = document.querySelector('.hero') || document.querySelector('.hero-small');
+
+  if (!nav || !hero) {
+    // fallback: no hero found — ensure nav uses default (solid) styling
+    nav.classList.add('nav--solid');
+    return;
+  }
+
+  // Use IntersectionObserver to detect when hero is visible under the navbar
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // hero is visible under the navbar -> use white links
+        nav.classList.add('nav--over-hero');
+        nav.classList.remove('nav--solid');
+      } else {
+        // hero out of view -> revert to solid/nav-on-page
+        nav.classList.remove('nav--over-hero');
+        nav.classList.add('nav--solid');
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: '-10px 0px 0px 0px', // tweak to trigger slightly earlier/later
+    threshold: 0
+  });
+
+  // Observe the hero's bottom area — this toggles when hero leaves viewport
+  io.observe(hero);
+
+  // Also check on load/resize in case hero height changes
+  window.addEventListener('resize', () => io.observe(hero));
+})();
+</script>
