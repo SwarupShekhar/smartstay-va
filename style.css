@@ -1807,5 +1807,30 @@ header .logo img {
 .hero-small {
   margin-top: 70px; /* or padding-top: 70px; if you prefer */
 }
+/* IMMEDIATE FIX: hide any accidental hero logo and lock navbar logo size */
+.nav .logo img,
+.logo img,
+.logo-img {
+  height: 60px !important;
+  max-height: 60px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* Hide any large logo that might have been placed inside hero by mistake */
+.hero img,
+.hero .brand-logo,
+.hero .logo-large,
+.logo-large {
+  display: none !important;
+  max-height: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Keep hero content pushed below fixed nav */
+.hero, .hero-small {
+  padding-top: 70px; /* adjust if your nav height differs */
+}
 
 
