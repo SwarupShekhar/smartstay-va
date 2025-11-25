@@ -1,11 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   // =======================
-  // HERO SLIDESHOW (image elements, more reliable)
+  // HERO SLIDESHOW
   // =======================
   const slideshow = document.querySelector('.hero-slideshow');
-  const customHero = document.getElementById('heroSlideshow'); // page-specific slideshow uses this id
+  const customHero = document.getElementById('heroSlideshow');
 
-  // Only initialize the global image-element slideshow when a page does NOT provide its own #heroSlideshow
   if (slideshow && !customHero) {
     const backgrounds = [
       'https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/refs/heads/SwarupShekhar-patch-1/Lucid_Origin_a_cinematic_photo_of_ultrarealistic_and_in_high_d_3.jpg',
@@ -17,30 +16,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let current = 0;
 
-    // create <img> elements and append to slideshow container
+    // Create <img> elements and append to slideshow container
     backgrounds.forEach((src, i) => {
       const img = document.createElement('img');
       img.src = src;
       img.alt = `slide-${i}`;
-      img.loading = 'lazy';
+      img.loading = 'eager'; // Changed to eager to load faster
       if (i === 0) img.classList.add('active');
       slideshow.appendChild(img);
     });
 
     const slides = slideshow.querySelectorAll('img');
-
-    // ensure CSS transitions are honored
-    slideshow.style.backgroundImage = 'none';
+    
+    // NOTE: I removed the line that cleared the backgroundImage. 
+    // This ensures the hero is never empty even if images are slow to load.
 
     function nextSlide() {
-      slides[current].classList.remove('active');
-      current = (current + 1) % slides.length;
-      slides[current].classList.add('active');
+      // Check if slides exist to prevent errors
+      if(slides.length > 0) {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+      }
     }
 
     const intervalId = setInterval(nextSlide, 5000);
 
-    // optional: stop when element removed
+    // Stop loop if element is removed from DOM
     const observer = new MutationObserver(() => {
       if (!document.body.contains(slideshow)) {
         clearInterval(intervalId);
@@ -60,9 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const form = e.target;
       const data = new FormData(form);
-
       const scriptURL = 'https://script.google.com/macros/s/AKfycbzWT4qtwjVQgW4Q0bfEcZr9vv2pUQy3waB7RPB2W96Bubh0FO7kJ_0rsL1GQxZnHUDj/exec';
-
       const submitBtn = form.querySelector("button[type='submit']");
       const statusEl = document.getElementById('status');
 
@@ -110,6 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// =======================
+// GLOBAL UTILITIES (Scroll, AOS, FAQ)
+// =======================
+
 // Reveal on scroll
 document.querySelectorAll('#smartstay-promise .smartstay-wrap, #smartstay-promise .metric')
   .forEach(el => el.classList.add('reveal'));
@@ -142,11 +147,13 @@ function runCounter(el) {
   }
   requestAnimationFrame(tick);
 }
+
 // Pause marquee on focus (keyboard users)
 document.querySelectorAll('.marquee').forEach((row)=>{
   row.addEventListener('focusin', ()=> row.querySelector('.marquee__track').style.animationPlayState = 'paused');
   row.addEventListener('focusout', ()=> row.querySelector('.marquee__track').style.animationPlayState = 'running');
 });
+
 // AOS Initialization
 AOS.init({
   duration: 800,
@@ -163,11 +170,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
-document.querySelectorAll('.faq-question').forEach(question => {
-  question.addEventListener('click', () => {
-    question.parentElement.classList.toggle('active');
-  });
-});
+
 // FAQ Accordion Functionality
 document.querySelectorAll('.faq-question').forEach(question => {
   question.addEventListener('click', () => {
@@ -175,47 +178,14 @@ document.querySelectorAll('.faq-question').forEach(question => {
     faqItem.classList.toggle('active');
   });
 });
-// FAQ Accordion Functionality
-document.querySelectorAll('.faq-question').forEach(question => {
-  question.addEventListener('click', () => {
-    const faqItem = question.parentElement;
-    faqItem.classList.toggle('active');
-  });
-});
-// FAQ Accordion Functionality
-document.querySelectorAll('.faq-question').forEach(question => {
-  question.addEventListener('click', () => {
-    const faqItem = question.parentElement;
-    faqItem.classList.toggle('active');
-  });
-});
-// FAQ Accordion Functionality
-document.querySelectorAll('.faq-question').forEach(question => {
-  question.addEventListener('click', () => {
-    const faqItem = question.parentElement;
-    faqItem.classList.toggle('active');
-  });
-});
-// FAQ Accordion Functionality
-document.querySelectorAll('.faq-question').forEach(question => {
-  question.addEventListener('click', () => {
-    const faqItem = question.parentElement;
-    faqItem.classList.toggle('active');
-  });
-});
-// FAQ Accordion Functionality
-document.querySelectorAll('.faq-question').forEach(question => {
-  question.addEventListener('click', () => {
-    const faqItem = question.parentElement;
-    faqItem.classList.toggle('active');
-  });
-});   
-// ========== Floating 3D House (home + pricing) ==========
+
+// ==========================================
+// FLOATING 3D HOUSE LOGIC
+// ==========================================
 (function () {
   const container = document.getElementById('floating-house');
-  if (!container) return; // only run on pages that have it
+  if (!container) return; 
 
-  // Make sure THREE + helpers exist
   if (!window.THREE || !THREE.GLTFLoader || !THREE.OrbitControls) {
     console.error('Three.js / GLTFLoader / OrbitControls not available for floating house.');
     return;
@@ -242,21 +212,17 @@ document.querySelectorAll('.faq-question').forEach(question => {
   container.appendChild(renderer.domElement);
 
   // Lights
-// Lights for a brighter "daytime" look
+  const hemi = new THREE.HemisphereLight(0xf5f7ff, 0xd0d8e8, 0.9);
+  scene.add(hemi);
 
-// Sky and ground light
-const hemi = new THREE.HemisphereLight(0xf5f7ff, 0xd0d8e8, 0.9);
-scene.add(hemi);
+  const ambient = new THREE.AmbientLight(0xffffff, 0.35);
+  scene.add(ambient);
 
-// Soft ambient to fill shadows without washing out
-const ambient = new THREE.AmbientLight(0xffffff, 0.35);
-scene.add(ambient);
+  const dir = new THREE.DirectionalLight(0xfff1c4, 2.0);
+  dir.position.set(2.5, 5, 3);
+  scene.add(dir);
 
-// Main sun light: slightly warm and stronger so the gold roof shines
-const dir = new THREE.DirectionalLight(0xfff1c4, 2.0);
-dir.position.set(2.5, 5, 3); // from above and in front
-scene.add(dir);
-  // Controls (small orbit for fun)
+  // Controls
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.enablePan = false;
@@ -268,9 +234,11 @@ scene.add(dir);
   const loader = new THREE.GLTFLoader();
   let house = null;
 
-  // First try local file; if that fails, use a simple fallback house
+  // Use the RAW link for the GLB file
+  const modelUrl = 'https://raw.githubusercontent.com/SwarupShekhar/smartstay-va/main/house-icon.glb';
+
   loader.load(
-    'house-icon.glb',
+    modelUrl,
     (gltf) => {
       house = gltf.scene || gltf.scenes?.[0];
       if (!house) {
@@ -281,7 +249,7 @@ scene.add(dir);
     },
     undefined,
     (error) => {
-      console.error('Error loading house-icon.glb, using fallback.', error);
+      console.error('Error loading 3D house:', error);
       house = createFallbackHouse();
       normalizeAndAddHouse(house);
     }
@@ -307,36 +275,20 @@ scene.add(dir);
   // Simple fallback "house" made of primitives
   function createFallbackHouse() {
     const g = new THREE.Group();
-
     const wallMat = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.05, roughness: 0.8 });
     const wallGeo = new THREE.BoxGeometry(1.2, 0.8, 1.0);
     const walls = new THREE.Mesh(wallGeo, wallMat);
     walls.position.y = 0.4;
     g.add(walls);
-
     const roofMat = new THREE.MeshStandardMaterial({ color: 0xb9381f, metalness: 0.1, roughness: 0.6 });
     const roofGeo = new THREE.ConeGeometry(0.9, 0.6, 4);
     const roof = new THREE.Mesh(roofGeo, roofMat);
     roof.rotation.y = Math.PI / 4;
     roof.position.y = 1.05;
     g.add(roof);
-
-    const doorMat = new THREE.MeshStandardMaterial({ color: 0x4b2e83 });
-    const doorGeo = new THREE.BoxGeometry(0.28, 0.44, 0.02);
-    const door = new THREE.Mesh(doorGeo, doorMat);
-    door.position.set(0, 0.2, 0.51);
-    g.add(door);
-
-    const chimMat = new THREE.MeshStandardMaterial({ color: 0x333333 });
-    const chimGeo = new THREE.BoxGeometry(0.12, 0.24, 0.12);
-    const chim = new THREE.Mesh(chimGeo, chimMat);
-    chim.position.set(-0.45, 1.15, -0.2);
-    g.add(chim);
-
     return g;
   }
 
-  // Resize
   function onResize() {
     const w = container.clientWidth || 180;
     const h = container.clientHeight || 180;
@@ -346,7 +298,6 @@ scene.add(dir);
   }
   window.addEventListener('resize', onResize);
 
-  // Animation loop
   function animate() {
     requestAnimationFrame(animate);
     if (house) {
@@ -357,41 +308,36 @@ scene.add(dir);
   }
   animate();
 })();
-<script>
+
+// ==========================================
+// NAV VISIBILITY LOGIC
+// ==========================================
 (function() {
-  // Selectors — adjust if your hero uses a different class
+  // Fixed Syntax: Removed <script> tags
   const nav = document.querySelector('.nav');
   const hero = document.querySelector('.hero') || document.querySelector('.hero-small');
 
   if (!nav || !hero) {
-    // fallback: no hero found — ensure nav uses default (solid) styling
-    nav.classList.add('nav--solid');
+    if(nav) nav.classList.add('nav--solid');
     return;
   }
 
-  // Use IntersectionObserver to detect when hero is visible under the navbar
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // hero is visible under the navbar -> use white links
         nav.classList.add('nav--over-hero');
         nav.classList.remove('nav--solid');
       } else {
-        // hero out of view -> revert to solid/nav-on-page
         nav.classList.remove('nav--over-hero');
         nav.classList.add('nav--solid');
       }
     });
   }, {
     root: null,
-    rootMargin: '-10px 0px 0px 0px', // tweak to trigger slightly earlier/later
+    rootMargin: '-10px 0px 0px 0px',
     threshold: 0
   });
 
-  // Observe the hero's bottom area — this toggles when hero leaves viewport
   io.observe(hero);
-
-  // Also check on load/resize in case hero height changes
   window.addEventListener('resize', () => io.observe(hero));
 })();
-</script>

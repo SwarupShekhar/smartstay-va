@@ -82,7 +82,10 @@ a {
   height: 50vh;
   min-height: 320px; /* keeps layout sane on very small screens */
 }
-
+.logo img {
+  height: 60px !important;
+  width: auto !important;
+}
 /* Slightly tighter overlay padding for small hero */
 .hero-small .hero-overlay {
   padding: 0 1rem;
@@ -1831,6 +1834,16 @@ header .logo img {
 /* Keep hero content pushed below fixed nav */
 .hero, .hero-small {
   padding-top: 70px; /* adjust if your nav height differs */
+}
+/* force consistent nav logo size on all pages */
+.nav img,
+.nav .logo img,
+.logo img {
+  height: 60px !important;
+  max-height: 60px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  display: block !important;
 }
 
 
