@@ -1762,4 +1762,15 @@ footer {
   width: auto;
   display: block;
 }
+/* === Global Logo Size (60px everywhere) === */
+.logo img,
+.nav .logo img,
+.nav-container .logo img,
+header .logo img {
+  height: 60px !important;
+  width: auto !important;
+  object-fit: contain;
+  display: block;
+}
+
 
