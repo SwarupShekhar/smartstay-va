@@ -529,7 +529,7 @@ footer {
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  row-gap: 28px;
+  row-gap: 68px;
   column-gap: 64px !important; /* stronger horizontal gap; force with !important */
   align-items: stretch;
   padding-left: 12px;
