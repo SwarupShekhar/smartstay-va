@@ -1722,3 +1722,44 @@ footer {
 .logo a {
   color: #ffffff !important;
 }
+/* === Restore a solid white navigation bar === */
+.nav {
+  background: #ffffff !important;      /* solid white navbar */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08) !important; /* subtle clean shadow */
+  position: fixed !important;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Container layout stays clean */
+.nav-container {
+  padding: 0 2rem !important;          /* keep thin navbar */
+  height: 70px !important;             /* fixed navbar height */
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+/* Logo remains blue (or your preferred color) */
+.logo a {
+  color: #004aad !important;           /* royal blue */
+}
+
+/* Menu links return to theme color */
+.nav-links a {
+  color: #004aad !important;           /* royal blue text */
+  font-weight: 600;
+}
+
+.nav-links a:hover {
+  color: #ffce00 !important;           /* golden hover */
+}
+
+/* Logo image size */
+.logo img {
+  height: 70px;
+  width: auto;
+  display: block;
+}
+
