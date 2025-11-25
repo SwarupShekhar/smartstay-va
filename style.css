@@ -48,7 +48,11 @@ a {
 .nav-links a:hover {
   color: #ffce00;
 }
-
+.logo img {
+  height: 40px;         /* adjust size */
+  width: auto;
+  display: block;
+}
 .btn {
   padding: 0.6rem 1.2rem;
   border-radius: 5px;
