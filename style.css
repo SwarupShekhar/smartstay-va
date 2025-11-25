@@ -1772,5 +1772,40 @@ header .logo img {
   object-fit: contain;
   display: block;
 }
+/* === Force nav/logo size everywhere === */
+.nav .logo img,
+.logo img,
+.logo-img {
+  height: 60px !important;
+  max-height: 60px !important;
+  width: auto !important;
+  object-fit: contain;
+  display: block !important;
+}
+
+/* === If the services page accidentally includes a giant logo inside the hero, hide it ===
+   Look for <img class="brand-logo"> or <img class="logo-large"> in services.html and this will hide it.
+*/
+.hero .brand-logo,
+.hero img.brand-logo,
+.hero .logo-large,
+.hero img.logo-large {
+  display: none !important;
+}
+
+/* === Ensure nav stays above hero and content is not hidden under fixed nav === */
+.nav {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1100 !important;
+}
+
+/* Add top offset so hero content doesn't sit under fixed nav (adjust 70px to your nav height) */
+.hero,
+.hero-small {
+  margin-top: 70px; /* or padding-top: 70px; if you prefer */
+}
 
 
