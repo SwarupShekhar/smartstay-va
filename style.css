@@ -527,11 +527,14 @@ footer {
 
 /* two-column card grid for mission + core values */
 .grid {
+	.grid .card {
+ 	 height: 100%;
+		}	
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 108px;
   column-gap: 64px !important; /* stronger horizontal gap; force with !important */
-  align-items: stretch;
+  align-items: start;
   padding-left: 12px;
   padding-right: 12px;
 }
@@ -1664,4 +1667,15 @@ footer {
   .card { padding: 18px; }
   .card h3 { font-size: 1rem; }
   .team-meta { flex-direction: column; gap: 10px; }
+}
+/* === Force equal-height cards in the .grid (mission + values) === */
+.grid {
+  align-items: stretch !important;    /* ensure grid cells stretch to same height */
+}
+.grid .card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;           /* force cards to match cell height */
+  align-self: stretch !important;
+  min-height: 320px;                 /* tweak as needed for desired height */
 }
