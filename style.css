@@ -1704,20 +1704,21 @@ footer {
 
 /* Logo size without increasing navbar height */
 .logo img {
-  height: 65px;                          /* adjust as needed */
+  height: 100px;                          /* adjust as needed */
   width: auto;
   display: block;
 }
 
 /* White nav links for visibility on hero */
-.nav-links a {
-  color: #ffffff !important;
+/* === Restore default royal blue nav link colors === */
+.nav-links a,
+.logo a {
+  color: #004aad !important;   /* royal blue */
 }
 
 .nav-links a:hover {
-  color: #ffce00 !important;
+  color: #ffce00 !important;   /* golden hover */
 }
-
 .logo a {
   color: #ffffff !important;
 }
