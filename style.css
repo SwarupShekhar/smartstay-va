@@ -1683,3 +1683,41 @@ footer {
   align-self: stretch !important;
   min-height: 320px;                 /* tweak as needed for desired height */
 }
+/* === Transparent Navbar Override === */
+.nav {
+  background: transparent !important;    /* remove white background */
+  box-shadow: none !important;           /* remove shadow */
+  position: fixed !important;            /* float on top of hero */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;                         /* stay above slideshow */
+}
+
+.nav-container {
+  padding: 0 2rem !important;            /* remove vertical padding */
+  height: 70px !important;               /* fixed navbar height */
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+/* Logo size without increasing navbar height */
+.logo img {
+  height: 65px;                          /* adjust as needed */
+  width: auto;
+  display: block;
+}
+
+/* White nav links for visibility on hero */
+.nav-links a {
+  color: #ffffff !important;
+}
+
+.nav-links a:hover {
+  color: #ffce00 !important;
+}
+
+.logo a {
+  color: #ffffff !important;
+}
