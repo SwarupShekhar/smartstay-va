@@ -452,7 +452,7 @@ footer {
 .services-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
+  gap: 65px;
   padding: 220px 80px 100px; /* leaves space for nav/hero above */
   position: relative;
   z-index: 10;
