@@ -1704,7 +1704,7 @@ footer {
 
 /* Logo size without increasing navbar height */
 .logo img {
-  height: 100px;                          /* adjust as needed */
+  height: 70px;                          /* adjust as needed */
   width: auto;
   display: block;
 }
